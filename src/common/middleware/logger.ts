@@ -13,7 +13,7 @@ export class LoggerMiddleware implements NestMiddleware {
       const { statusCode } = res;
       const contentLength = res.get('content-length');
       this.logger.log(
-        `${method} ${originalUrl} ${statusCode} ${contentLength} - ${userAgent} ${ip} `,
+        `${method} ${originalUrl} ${statusCode} - ${userAgent} ${ip} `,
       );
     });
     next();

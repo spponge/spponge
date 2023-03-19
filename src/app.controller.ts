@@ -7,7 +7,6 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    throw new BadRequestException('dd');
     return this.appService.getHello();
   }
 }

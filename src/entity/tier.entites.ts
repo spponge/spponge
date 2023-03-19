@@ -5,10 +5,8 @@ import { Users } from './user.entites';
 export class Tiers {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
-
-  @Column({ type: 'string', name: 'tierName' })
+  @Column({ type: 'varchar', name: 'tierName' })
   tierName: string;
-
   @OneToMany(() => Users, (Users) => Users.Tiers)
   Users: Users[];
 }

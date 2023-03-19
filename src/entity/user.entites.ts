@@ -12,16 +12,16 @@ export class Users {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
 
-  @Column({ type: 'string', name: 'email' })
+  @Column({ type: 'varchar', name: 'email' })
   email: string;
 
-  @Column({ type: 'string', name: 'password' })
+  @Column({ type: 'varchar', name: 'password' })
   password: string;
 
   @Column({ type: 'int', name: 'point' })
   point: number;
 
-  @Column({ type: 'string', name: 'nickName' })
+  @Column({ type: 'varchar', name: 'nickName' })
   nickName: string;
 
   @Column({ type: 'int', name: 'TierId' })
