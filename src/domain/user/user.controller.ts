@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Res, Get, Post, Body, Patch, Param, Delete,  } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/input/create-user.dto';
@@ -19,8 +19,12 @@ export class UserController {
     }
 
     @Post('login')
-    async login(@Body() loginUserDto: LoginUserDto): Promise<LoginOutputDto> {
-        const result = await this.userService.login(loginUserDto);
-        return result;
+    async login(@Body() loginUserDto: LoginUserDto, @Res({ passthrough: true }) res: Response): Promise<void> {
+        const jwt = await this.userService.login(loginUserDto);
+        res.cookie('jwt', jwt.access_token,{
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000, //1 day
+        });
+        return ;
     }
 }
