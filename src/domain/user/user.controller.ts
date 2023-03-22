@@ -5,7 +5,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/input/create-user.dto';
 import { LoginUserDto } from './dto/input/login-user.dto';
 import { CreateOutputDto } from './dto/output/create';
-import { LoginOutputDto } from './dto/output/login';
+import { LoginOutputDto } from './dto/output/login.dto';
 
 @Controller('user')
 export class UserController {
@@ -19,14 +19,8 @@ export class UserController {
     }
 
     @Post('login')
-    async login(@Body() loginUserDto: LoginUserDto): Promise<void> {
-        await this.userService.login(loginUserDto);
-        return;
-        /*토큰을 던져줌
-        * 토큰은 jwt를 바로?
-        * 공식문서 jwt 부분 참고하기
-        * */
+    async login(@Body() loginUserDto: LoginUserDto): Promise<LoginOutputDto> {
+        const result = await this.userService.login(loginUserDto);
+        return result;
     }
-
-
 }
