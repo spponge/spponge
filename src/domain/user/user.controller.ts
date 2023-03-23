@@ -6,12 +6,13 @@ import { CreateUserDto } from './dto/input/create-user.dto';
 import { LoginUserDto } from './dto/input/login-user.dto';
 import { CreateOutputDto } from './dto/output/create';
 import { LoginOutputDto } from './dto/output/login.dto';
+import { Response } from 'express';
 
+@ApiTags('User')
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
-    @ApiTags('User')
     @Post()
     async create(@Body() createUserDto: CreateUserDto): Promise<void> {
         await this.userService.create(createUserDto);
@@ -19,9 +20,9 @@ export class UserController {
     }
 
     @Post('login')
-    async login(@Body() loginUserDto: LoginUserDto, @Res({ passthrough: true }) res: Response): Promise<void> {
+    async login(@Body() loginUserDto: LoginUserDto, @Res({ passthrough: true }) response: Response): Promise<void> {
         const jwt = await this.userService.login(loginUserDto);
-        res.cookie('jwt', jwt.access_token,{
+        response.cookie('jwt', jwt.access_token,{
             httpOnly: true,
             maxAge: 24 * 60 * 60 * 1000, //1 day
         });
