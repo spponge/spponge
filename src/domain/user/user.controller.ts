@@ -1,34 +1,31 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { Controller, Res, Get, Post, Body, Patch, Param, Delete,  } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { CreateUserDto } from './dto/input/create-user.dto';
+import { LoginUserDto } from './dto/input/login-user.dto';
+import { CreateOutputDto } from './dto/output/create';
+import { LoginOutputDto } from './dto/output/login.dto';
+import { Response } from 'express';
 
+@ApiTags('User')
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+    constructor(private readonly userService: UserService) {}
 
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
-  }
+    @Post()
+    async create(@Body() createUserDto: CreateUserDto): Promise<void> {
+        await this.userService.create(createUserDto);
+        return;
+    }
 
-  @Get()
-  findAll() {
-    return this.userService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
-  }
+    @Post('login')
+    async login(@Body() loginUserDto: LoginUserDto, @Res({ passthrough: true }) response: Response): Promise<void> {
+        const jwt = await this.userService.login(loginUserDto);
+        response.cookie('jwt', jwt.access_token,{
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000, //1 day
+        });
+        return ;
+    }
 }

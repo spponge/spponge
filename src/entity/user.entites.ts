@@ -1,13 +1,16 @@
+/* eslint-disable prettier/prettier */
 import {
   Column,
   Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 import { Tiers } from './tier.entites';
 
 @Entity()
+@Unique(['email'])
 export class Users {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
