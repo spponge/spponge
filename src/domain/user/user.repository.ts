@@ -5,7 +5,6 @@ import { Users } from 'src/entity/user.entites';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/input/create-user.dto';
 import { LoginUserDto } from './dto/input/login-user.dto';
-import { LoginOutputDto } from "./dto/output/login.dto";
 
 @Injectable()
 export class UserRepository {
@@ -23,9 +22,12 @@ export class UserRepository {
     }
 
     async findUser(loginUserDto: LoginUserDto): Promise<Users> {
-        const {email} = loginUserDto;
-        return await this.userModel.findOne({where: {
-            email
-        }});
+        console.log('here comes@UserRepo');
+        const { email } = loginUserDto;
+        return await this.userModel.findOne({
+            where: {
+                email,
+            },
+        });
     }
 }
