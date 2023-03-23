@@ -24,6 +24,16 @@ export class CreateUserDto {
 
     @IsString()
     @IsNotEmpty()
+    @Matches(/^[a-zA-Z0-9\d!@#$%^&*()]{8,20}/)
+    @ApiProperty({
+        example: 'asdf1234!',
+        description: '비밀번호 확인',
+        required: true,
+    })
+    confirmPassword: string;
+
+    @IsString()
+    @IsNotEmpty()
     @Matches(/^[가-힣a-zA-Z]+$/)
     @ApiProperty({
         example: '길똥이',
