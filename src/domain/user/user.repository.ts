@@ -4,6 +4,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from 'src/entity/user.entites';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/input/create-user.dto';
+import { LoginUserDto } from './dto/input/login-user.dto';
+import { LoginOutputDto } from "./dto/output/login.dto";
 
 @Injectable()
 export class UserRepository {
@@ -18,5 +20,12 @@ export class UserRepository {
         newUser.TierId = 1;
         await this.userModel.save(newUser);
         return;
+    }
+
+    async findUser(loginUserDto: LoginUserDto): Promise<Users> {
+        const {email} = loginUserDto;
+        return await this.userModel.findOne({where: {
+            email
+        }});
     }
 }
