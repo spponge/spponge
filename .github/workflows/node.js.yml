@@ -4,20 +4,20 @@ on:
         branches:
             - CICDTest
 jobs:
-     SSH:
+    SSH:
     runs-on: ubuntu-latest
     container: ubuntu:20.04
     steps:
-      - uses: actions/checkout@v2
-      - name: Run scripts in server
-        uses: appleboy/ssh-action@master
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          host: ${{ secrets.HOST }}
-          username: ubuntu
-          port: 3000
-          script: |
-            cd spponge
-            git pull origin CICDTest
-            npm i
-            pm2 restart src/main.ts
+        - uses: actions/checkout@v2
+        - name: Run scripts in server
+          uses: appleboy/ssh-action@master
+          with:
+              key: ${{ secrets.SSH_KEY }}
+              host: ${{ secrets.HOST }}
+              username: ubuntu
+              port: 3000
+              script: |
+                  cd spponge
+                  git pull origin CICDTest
+                  npm i
+                  pm2 restart src/main.ts
