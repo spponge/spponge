@@ -15,7 +15,7 @@ jobs:
                   key: ${{ secrets.SSH_KEY }}
                   host: ${{ secrets.HOST }}
                   username: ubuntu
-                  port: 3000
+                  port: 5000
                   script: |
                       cd spponge
                       git pull origin CICDTest
