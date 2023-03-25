@@ -1,0 +1,24 @@
+name: Spponge CI/CD
+on:
+    push:
+        branches:
+            - CICDTest
+jobs:
+    SSH:
+        runs-on: ubuntu:20.04
+        steps:
+            - name: Checkout source Code
+              uses: actions/checkout@v2
+              uses: appleboy/ssh-action@master
+              with:
+                  node-version: 16.14.0
+                  key: ${{ secrets.SSH_KEY }}
+                  host: ${{ secrets.HOST }}
+                  username: ubuntu
+                  port: 3000
+                  script: |
+                      npm install -g pm2@latest
+                      cd spponge
+                      git pull origin CICDTest
+                      npm install
+                      pm2 restart src/main.ts
