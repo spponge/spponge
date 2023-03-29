@@ -4,7 +4,7 @@ import { UserService } from './user.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/input/create-user.dto';
 import { LoginUserDto } from './dto/input/login-user.dto';
-import { EmailVerificationDto } from './dto/input/verify-user-email.dto';
+import { VerifyUserEmailDto } from './dto/input/verify-user-email.dto';
 import { Response } from 'express';
 
 @ApiTags('User')
@@ -14,7 +14,7 @@ export class UserController {
 
     @ApiOperation({ summary: '이메일 인증코드 전송 API' })
     @Post('codeEmail')
-    async sendVerificationCode(@Body() emailVerificationDto: EmailVerificationDto): Promise<string> {
+    async sendVerificationCode(@Body() emailVerificationDto: VerifyUserEmailDto): Promise<string> {
         const code = await this.userService.sendVerificationCode(emailVerificationDto);
         return code;
     }
