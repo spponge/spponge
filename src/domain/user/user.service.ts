@@ -1,15 +1,30 @@
 /* eslint-disable prettier/prettier */
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, BadRequestException } from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from './dto/input/create-user.dto';
 import { LoginUserDto } from './dto/input/login-user.dto';
 import { LoginOutputDto } from './dto/output/login.dto';
+import { VerifyUserEmailDto } from './dto/input/verify-user-email.dto';
+import { MailService } from '../mailer/mail.service';
 
 @Injectable()
 export class UserService {
-    constructor(private readonly userRepository: UserRepository, private readonly jwtService: JwtService) {}
+    constructor(
+        private readonly userRepository: UserRepository,
+        private readonly jwtService: JwtService,
+        private readonly mailService: MailService,
+    ) {}
+
+    async sendVerificationCode(emailVerificationDto: VerifyUserEmailDto): Promise<string> {
+        const userExists = await this.userRepository.findUserByEmail(emailVerificationDto);
+        if (userExists) {
+            throw new BadRequestException('이미 존재하는 계정입니다.');
+        }
+        const code = await this.mailService.sendVerificationCode(emailVerificationDto);
+        return code;
+    }
 
     async create(createUserDto: CreateUserDto): Promise<void> {
         const { email, password, confirmPassword, nickName } = createUserDto;
