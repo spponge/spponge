@@ -4,6 +4,7 @@ import { UserService } from './user.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/input/create-user.dto';
 import { LoginUserDto } from './dto/input/login-user.dto';
+import { EmailVerificationDto } from './dto/input/email-varification.dto';
 import { Response } from 'express';
 
 @ApiTags('User')
@@ -11,8 +12,15 @@ import { Response } from 'express';
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
+    @ApiOperation({ summary: '이메일 인증코드 전송 API' })
+    @Post('authCode')
+    async sendVerificationCode(@Body() emailVerificationDto: EmailVerificationDto): Promise<string> {
+        const code = await this.userService.sendVerificationCode(emailVerificationDto);
+        return code;
+    }
+
     @ApiOperation({ summary: '회원가입 API' })
-    @Post()
+    @Post('signup')
     async create(@Body() createUserDto: CreateUserDto): Promise<void> {
         await this.userService.create(createUserDto);
         return;
