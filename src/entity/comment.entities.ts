@@ -2,6 +2,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Questions } from './question.entites';
 import { Replies } from './reply.entities';
+import { Users } from './user.entites';
 
 @Entity()
 export class Comments {
@@ -14,12 +15,22 @@ export class Comments {
     @Column({ type: 'int', name: 'QuestionId' })
     QuestionId: number;
 
+    @Column({ type: 'int', name: 'UserId' })
+    UserId: number;
+
+    @ManyToOne(() => Users, Users => Users.Comments, {
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+    })
     @ManyToOne(() => Questions, Questions => Questions.Comments, {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
     })
     @OneToMany(() => Replies, Replies => Replies.Comments)
     Replies: Replies[];
+
+    @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
+    Users: Users;
 
     @JoinColumn([{ name: 'QuestionId', referencedColumnName: 'id' }])
     Questions: Questions;

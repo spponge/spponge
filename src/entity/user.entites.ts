@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Comments } from './comment.entities';
 import { Questions } from './question.entites';
 import { Tiers } from './tier.entites';
 
@@ -28,6 +29,9 @@ export class Users {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
     })
+    @OneToMany(() => Comments, Comments => Comments.Users)
+    Comments: Comments[];
+
     @OneToMany(() => Questions, Questions => Questions.Users)
     Questions: Questions[];
 
