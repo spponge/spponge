@@ -18,4 +18,10 @@ export class CommentRepositoryImpl implements CommentRepository {
         await this.commentModel.save(newComment);
         return;
     }
+
+    async findAllByQuestionId(QuestionId: number): Promise<Comments[]> {
+        return await this.commentModel.find({
+            where: { QuestionId },
+        });
+    }
 }
