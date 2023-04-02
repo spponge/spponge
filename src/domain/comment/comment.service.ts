@@ -1,18 +1,17 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { UserRepository } from '../user/user.repository';
-import { CommentRepository } from './comment.repository';
+import { CommentRepository } from './comment.repository.interface';
 import { CreateCommentDto } from './dto/input/create-comment.dto';
 
 @Injectable()
 export class CommentService {
     constructor(
+        @Inject(CommentRepository)
         private readonly commentRepository: CommentRepository,
-        private readonly userRepository: UserRepository,
     ) {}
 
-    async create(createCommentDto: CreateCommentDto, email: string): Promise<void> {
-        const userId = await (await this.userRepository.findUserByEmail({ email })).id;
+    async create(createCommentDto: CreateCommentDto, userId: number): Promise<void> {
         return await this.commentRepository.create(createCommentDto, userId);
     }
 }

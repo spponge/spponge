@@ -18,6 +18,6 @@ export class CommentController {
         @Body() createCommentDto: CreateCommentDto,
         @Req() req: Request & { user: JwtPayload },
     ): Promise<void> {
-        return await this.commentService.create(createCommentDto, req.user.email);
+        return await this.commentService.create(createCommentDto, req.user.id);
     }
 }

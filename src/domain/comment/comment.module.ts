@@ -2,14 +2,17 @@
 import { Module } from '@nestjs/common';
 import { CommentController } from './comment.controller';
 import { CommentService } from './comment.service';
-import { CommentRepository } from './comment.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Comments } from 'src/entity/comment.entities';
+import { CommentRepository } from './comment.repository.interface';
 import { UserModule } from '../user/user.module';
+import { UserRepository } from '../user/user.repository';
+import { AuthModule } from 'src/common/auth/auth.module';
+import { CommentRepositoryImpl } from './comment.repository';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Comments]), UserModule],
+    imports: [TypeOrmModule.forFeature([Comments]), UserModule, AuthModule],
     controllers: [CommentController],
-    providers: [CommentService, CommentRepository],
+    providers: [CommentService, { provide: CommentRepository, useClass: CommentRepositoryImpl }],
 })
 export class CommentModule {}

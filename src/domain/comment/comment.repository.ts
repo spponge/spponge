@@ -3,10 +3,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Comments } from 'src/entity/comment.entities';
 import { Repository } from 'typeorm';
+import { CommentRepository } from './comment.repository.interface';
 import { CreateCommentDto } from './dto/input/create-comment.dto';
 
 @Injectable()
-export class CommentRepository {
+export class CommentRepositoryImpl implements CommentRepository {
     constructor(@InjectRepository(Comments) private commentModel: Repository<Comments>) {}
 
     async create(createCommentDto: CreateCommentDto, userId: number): Promise<void> {
