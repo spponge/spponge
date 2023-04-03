@@ -14,7 +14,7 @@ class FakeCommentRepository implements CommentRepository {
             content: '댓글1',
             QuestionId: 1,
             UserId: 4,
-            Replies: [],
+            ReComments: [],
             Users: null,
             Questions: null,
         },
@@ -23,7 +23,7 @@ class FakeCommentRepository implements CommentRepository {
             content: '댓글2',
             QuestionId: 1,
             UserId: 5,
-            Replies: [],
+            ReComments: [],
             Users: null,
             Questions: null,
         },
@@ -32,7 +32,7 @@ class FakeCommentRepository implements CommentRepository {
             content: '댓글3',
             QuestionId: 2,
             UserId: 6,
-            Replies: [],
+            ReComments: [],
             Users: null,
             Questions: null,
         },
@@ -45,6 +45,8 @@ class FakeCommentRepository implements CommentRepository {
     }
 
     async update(id: number, updateCommentDto: UpdateCommentDto): Promise<void> {}
+
+    async delete(id: number): Promise<void> {}
 }
 
 describe('CommentService', () => {
@@ -105,6 +107,14 @@ describe('CommentService', () => {
             const updateCommentDto: UpdateCommentDto = { content: 'Test comment' };
             const id = 1;
             const result = await commentService.update(id, updateCommentDto);
+            expect(result).toBe(undefined);
+        });
+    });
+
+    describe('delete', () => {
+        it('댓글이 삭제되어야 한다.', async () => {
+            const id = 1;
+            const result = await commentService.delete(id);
             expect(result).toBe(undefined);
         });
     });
