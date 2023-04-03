@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Questions } from './question.entites';
-import { Replies } from './reply.entities';
+import { ReComments } from './recomment.entities';
 import { Users } from './user.entites';
 
 @Entity()
@@ -26,8 +26,8 @@ export class Comments {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
     })
-    @OneToMany(() => Replies, Replies => Replies.Comments)
-    Replies: Replies[];
+    @OneToMany(() => ReComments, ReComments => ReComments.Comments)
+    ReComments: ReComments[];
 
     @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
     Users: Users;

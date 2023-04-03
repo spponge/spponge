@@ -16,7 +16,7 @@ export class Questions {
 
     @Column({ type: 'int', name: 'UserId' })
     UserId: number;
-
+    //
     @ManyToOne(() => Users, Users => Users.Questions, {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',

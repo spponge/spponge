@@ -10,7 +10,7 @@ import { QuestionModule } from './domain/question/question.module';
 import { UserModule } from './domain/user/user.module';
 import { Comments } from './entity/comment.entities';
 import { Questions } from './entity/question.entites';
-import { Replies } from './entity/reply.entities';
+import { ReComments } from './entity/recomment.entities';
 import { Tiers } from './entity/tier.entites';
 import { Users } from './entity/user.entites';
 
@@ -32,7 +32,7 @@ import { Users } from './entity/user.entites';
                     username: configService.get('DB_USERNAME'),
                     password: configService.get('DB_PASSWORD'),
                     database: configService.get('DB_DATABASE'),
-                    entities: [Tiers, Users, Questions, Comments, Replies],
+                    entities: [Tiers, Users, Questions, Comments, ReComments],
                     synchronize: true,
                 };
             },

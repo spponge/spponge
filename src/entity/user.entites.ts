@@ -2,6 +2,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { Comments } from './comment.entities';
 import { Questions } from './question.entites';
+import { ReComments } from './recomment.entities';
 import { Tiers } from './tier.entites';
 
 @Entity()
@@ -31,6 +32,9 @@ export class Users {
     })
     @OneToMany(() => Comments, Comments => Comments.Users)
     Comments: Comments[];
+
+    @OneToMany(() => ReComments, ReComments => ReComments.Users)
+    ReComments: ReComments[];
 
     @OneToMany(() => Questions, Questions => Questions.Users)
     Questions: Questions[];
