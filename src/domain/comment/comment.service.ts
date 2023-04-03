@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { Inject, Injectable } from '@nestjs/common';
 import { Comments } from 'src/entity/comment.entities';
-import { UserRepository } from '../user/user.repository';
 import { CommentRepository } from './comment.repository.interface';
 import { CreateCommentDto } from './dto/input/create-comment.dto';
+import { UpdateCommentDto } from './dto/input/update-comment.dto';
 
 @Injectable()
 export class CommentService {
@@ -18,5 +18,9 @@ export class CommentService {
 
     async findAllByQuestionId(QuestionId: number): Promise<Comments[]> {
         return await this.commentRepository.findAllByQuestionId(QuestionId);
+    }
+
+    async update(id: number, updateCommentDto: UpdateCommentDto): Promise<void> {
+        return await this.commentRepository.update(id, updateCommentDto);
     }
 }

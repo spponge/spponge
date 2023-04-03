@@ -5,6 +5,7 @@ import { Comments } from 'src/entity/comment.entities';
 import { CommentRepository } from './comment.repository.interface';
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/input/create-comment.dto';
+import { UpdateCommentDto } from './dto/input/update-comment.dto';
 
 class FakeCommentRepository implements CommentRepository {
     private readonly comments: Comments[] = [
@@ -42,6 +43,8 @@ class FakeCommentRepository implements CommentRepository {
     async findAllByQuestionId(QuestionId: number): Promise<Comments[]> {
         return this.comments.filter(comment => comment.QuestionId === QuestionId);
     }
+
+    async update(id: number, updateCommentDto: UpdateCommentDto): Promise<void> {}
 }
 
 describe('CommentService', () => {
@@ -94,6 +97,15 @@ describe('CommentService', () => {
                     Questions: null,
                 },
             ]);
+        });
+    });
+
+    describe('update', () => {
+        it('댓글이 수정되어야 한다.', async () => {
+            const updateCommentDto: UpdateCommentDto = { content: 'Test comment' };
+            const id = 1;
+            const result = await commentService.update(id, updateCommentDto);
+            expect(result).toBe(undefined);
         });
     });
 });
