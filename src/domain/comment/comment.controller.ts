@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Post, Patch, Req, UseGuards, Param } from '@nestjs/common';
+import { Body, Controller, Post, Patch, Delete, Req, UseGuards, Param } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
 import { JwtAuthGuard } from 'src/common/auth/jwt-auth.guard';
@@ -33,5 +33,11 @@ export class CommentController {
         @Body() updateCommentDto: UpdateCommentDto,
     ): Promise<void> {
         return await this.commentService.update(id, updateCommentDto);
+    }
+
+    @ApiOperation({ summary: '댓글 삭제 API' })
+    @Delete(':id')
+    async delete(@Param('id') id: number): Promise<void> {
+        return await this.commentService.delete(id);
     }
 }
