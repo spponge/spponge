@@ -2,13 +2,18 @@
 import {
   Column,
   Entity,
-  JoinColumn,
-  ManyToOne,
+  JoinColumn, ManyToMany,
+  ManyToOne, OneToMany,
   PrimaryGeneratedColumn,
-  Unique,
-} from 'typeorm';
+  Unique
+} from "typeorm";
 import { Tiers } from './tier.entites';
-
+import { CategoryUsers } from './categoryUser.entites';
+import { Categories } from './category.entites';
+import { Questions } from './question.entites';
+import { QuestionLikes } from './questionLike.entites';
+import { Comments } from './comment.entites';
+import { CommentLikes } from './commentLike.entites';
 @Entity()
 @Unique(['email'])
 export class Users {
@@ -36,4 +41,25 @@ export class Users {
   })
   @JoinColumn([{ name: 'TierId', referencedColumnName: 'id' }])
   Tiers: Tiers;
+
+  @OneToMany(() => CategoryUsers, (CategoryUsers) => CategoryUsers.Users)
+  CategoryUsers:CategoryUsers
+
+  @ManyToMany(() => Categories, (Categories) => Categories.Users)
+  Categories: Categories[]
+
+  @OneToMany(() => Questions, (Questions) => Questions.Users)
+  Questions:Questions[]
+
+  @OneToMany(() => QuestionLikes, (QuestionLikes) => QuestionLikes.Users)
+  QuestionLikes:QuestionLikes[]
+
+  @OneToMany(() => Comments, (Comments) => Comments.Users)
+  Comments:Comments[]
+
+  @OneToMany(() => CommentLikes, (CommentLikes) => CommentLikes.Users)
+  CommentLikes:CommentLikes[]
 }
+
+
+
