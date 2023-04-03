@@ -5,6 +5,7 @@ import { Comments } from 'src/entity/comment.entities';
 import { Repository } from 'typeorm';
 import { CommentRepository } from './comment.repository.interface';
 import { CreateCommentDto } from './dto/input/create-comment.dto';
+import { UpdateCommentDto } from './dto/input/update-comment.dto';
 
 @Injectable()
 export class CommentRepositoryImpl implements CommentRepository {
@@ -23,5 +24,11 @@ export class CommentRepositoryImpl implements CommentRepository {
         return await this.commentModel.find({
             where: { QuestionId },
         });
+    }
+
+    async update(id: number, updateCommentDto: UpdateCommentDto): Promise<void> {
+        const content = updateCommentDto.content;
+        await this.commentModel.update({ id }, { content });
+        return;
     }
 }
