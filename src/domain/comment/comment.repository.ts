@@ -31,4 +31,8 @@ export class CommentRepositoryImpl implements CommentRepository {
         await this.commentModel.update({ id }, { content });
         return;
     }
+
+    async delete(id: number): Promise<void> {
+        await this.commentModel.delete({ id });
+    }
 }
