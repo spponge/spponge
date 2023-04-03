@@ -12,13 +12,17 @@ import { Comments } from './comment.entites';
 // ReComment Entity
 @Entity('ReComment')
 export class ReComments {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+  @PrimaryGeneratedColumn({ type: "int", name: "id" })
+  id: number;
   @Column({ nullable: true })
   comment: string;
-
+  @Column({ type: 'int', name: 'CommentId' })
+  CommentId: number;
   // Relations
-  @ManyToOne(() => Comments, (Comments) => Comments.ReComments)
+  @ManyToOne(() => Comments, (Comments) => Comments.ReComments,{
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn([{ name: 'CommentId', referencedColumnName: 'id' }])
   Comments: Comments;
 }

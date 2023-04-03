@@ -14,16 +14,15 @@ import { CategoryUsers } from "./categoryUser.entites";
 // Categorys Entity
 @Entity('Categories')
 export class Categories {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+  @PrimaryGeneratedColumn({ type: "int", name: "id" })
+  id: number;
   @Column({ nullable: true })
   category: string;
-
-  Relations
-  @ManyToMany(() => Users, (Users) => Users.Categories)
-  Users: Users[];
-
+  // Relations
   @OneToMany(() => CategoryUsers, (CategoryUsers) => CategoryUsers.Categories)
   CategoryUsers: CategoryUsers[];
+
+  // 다대다 지양
+  // @ManyToMany(() => Users, (Users) => Users.Categories)
+  // Users: Users[];
 }

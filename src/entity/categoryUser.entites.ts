@@ -14,10 +14,22 @@ import { Users } from "./user.entites";
 export class CategoryUsers {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
-
-  @ManyToOne(() => Users, (Users) => Users.CategoryUsers)
-  Users: Users
-
-  @ManyToOne(() => Categories, (Categories) => Categories.CategoryUsers)
-  Categories: Categories
+  @Column({ type: 'int', name: 'UserId' })
+  UserId: number;
+  @Column({ type: 'int', name: 'CategoryId' })
+  CategoryId: number;
+  // Relations
+  @ManyToOne(() => Users, (Users) => Users.CategoryUsers, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @ManyToOne(() => Categories, (Categories) => Categories.CategoryUsers, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  // Joins
+  @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
+  Users: Users;
+  @JoinColumn([{ name: 'CategoryId', referencedColumnName: 'id' }])
+  Categories: Categories;
 }
