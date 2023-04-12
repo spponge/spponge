@@ -11,6 +11,8 @@ export class ReComments {
     content: string;
     @Column({ type: 'int', name: 'CommentId' })
     CommentId: number;
+    @Column({ type: 'int', name: 'UserId' })
+    UserId: number;
 
     @ManyToOne(() => Comments, Comments => Comments.ReComments, {
         onDelete: 'CASCADE',
