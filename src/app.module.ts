@@ -4,7 +4,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthService } from './common/auth/auth.service';
 import { LoggerMiddleware } from './common/middleware/logger';
 import { CommentModule } from './domain/comment/comment.module';
 import { QuestionModule } from './domain/question/question.module';
@@ -43,7 +42,7 @@ import { Users } from './entity/user.entites';
         CommentModule,
     ],
     controllers: [AppController],
-    providers: [AppService, AuthService],
+    providers: [AppService],
 })
 export class AppModule implements NestModule {
     configure(consumer: MiddlewareConsumer): any {
