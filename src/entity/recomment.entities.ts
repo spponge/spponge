@@ -8,7 +8,7 @@ export class ReComments {
     @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
     id: number;
     @Column({ nullable: true })
-    comment: string;
+    content: string;
     @Column({ type: 'int', name: 'CommentId' })
     CommentId: number;
 

@@ -17,6 +17,7 @@ import { CommentLikes } from './entity/commentLike.entites';
 import { Questions } from './entity/question.entites';
 import { QuestionLikes } from './entity/questionLike.entites';
 import { ReComments } from './entity/recomment.entities';
+import { RecommentModule } from './domain/recomment/recomment.module';
 
 @Module({
     imports: [
@@ -54,6 +55,7 @@ import { ReComments } from './entity/recomment.entities';
         UserModule,
         QuestionModule,
         CommentModule,
+        RecommentModule,
     ],
     controllers: [AppController],
     providers: [AppService],

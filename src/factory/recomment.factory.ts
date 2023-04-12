@@ -7,7 +7,7 @@ export default setSeederFactory(ReComments, faker => {
 
     faker.locale = 'ko';
 
-    recomment.comment = faker.lorem.sentence();
+    recomment.content = faker.lorem.sentence();
 
     const comment = new Comments();
     comment.content = faker.lorem.sentence();
