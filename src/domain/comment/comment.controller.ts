@@ -2,10 +2,10 @@
 import { Body, Controller, Post, Patch, Delete, Req, UseGuards, Param } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
-import { JwtAuthGuard } from 'src/common/auth/jwt-auth.guard';
+import { JwtAuthGuard } from 'src/common/auth/jwt/jwt.guard';
+import { Users } from 'src/entity/user.entites';
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/input/create-comment.dto';
-import { JwtPayload } from 'src/common/auth/interfaces/jwt-payload.interface';
 import { UpdateCommentDto } from './dto/input/update-comment.dto';
 
 @ApiTags('Comment')
@@ -16,12 +16,10 @@ export class CommentController {
     @ApiOperation({ summary: '댓글 작성 API' })
     @UseGuards(JwtAuthGuard)
     @Post()
-    async create(
-        @Body() createCommentDto: CreateCommentDto,
-        @Req() req: Request & { user: JwtPayload },
-    ): Promise<void> {
-        console.log(`@Controller: ${req.user.id}`);
-        return await this.commentService.create(createCommentDto, req.user.id);
+    async create(@Body() createCommentDto: CreateCommentDto, @Req() req: Request): Promise<void> {
+        console.log('@@commentController', req.user);
+        const user = req.user as Users;
+        return await this.commentService.create(createCommentDto, user.id);
     }
 
     @ApiOperation({ summary: '댓글 수정 API' })

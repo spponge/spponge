@@ -40,4 +40,13 @@ export class UserRepository {
             },
         });
     }
+
+    async findUserByIdWithoutPassword(userId: number): Promise<Users | null> {
+        const user = await this.userModel
+            .createQueryBuilder('user')
+            .select(['user.id', 'user.email', 'user.nickName'])
+            .where('user.id = :id', { id: userId })
+            .getOne();
+        return user;
+    }
 }

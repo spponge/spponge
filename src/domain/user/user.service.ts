@@ -29,6 +29,7 @@ export class UserService {
     async login(loginUserDto: LoginUserDto): Promise<LoginOutputDto> {
         const { password } = loginUserDto;
         const user = await this.userRepository.findUser(loginUserDto);
+        console.log(`@@userService user: ${user.password}`);
         if (!user) {
             throw new UnauthorizedException('로그인에 실패하였습니다.');
         }
