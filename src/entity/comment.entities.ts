@@ -2,6 +2,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Questions } from './question.entites';
 import { ReComments } from './recomment.entities';
+import { CommentLikes } from './commentLike.entites';
 import { Users } from './user.entites';
 
 @Entity()
@@ -28,6 +29,8 @@ export class Comments {
     })
     @OneToMany(() => ReComments, ReComments => ReComments.Comments)
     ReComments: ReComments[];
+    @OneToMany(() => CommentLikes, CommentLikes => CommentLikes.Comments)
+    CommentLikes: CommentLikes;
 
     @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
     Users: Users;

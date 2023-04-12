@@ -5,14 +5,18 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './common/middleware/logger';
-import { CommentModule } from './domain/comment/comment.module';
 import { QuestionModule } from './domain/question/question.module';
 import { UserModule } from './domain/user/user.module';
-import { Comments } from './entity/comment.entities';
-import { Questions } from './entity/question.entites';
-import { ReComments } from './entity/recomment.entities';
+import { CommentModule } from './domain/comment/comment.module';
 import { Tiers } from './entity/tier.entites';
 import { Users } from './entity/user.entites';
+import { Categories } from './entity/category.entites';
+import { CategoryUsers } from './entity/categoryUser.entites';
+import { Comments } from './entity/comment.entities';
+import { CommentLikes } from './entity/commentLike.entites';
+import { Questions } from './entity/question.entites';
+import { QuestionLikes } from './entity/questionLike.entites';
+import { ReComments } from './entity/recomment.entities';
 
 @Module({
     imports: [
@@ -32,8 +36,18 @@ import { Users } from './entity/user.entites';
                     username: configService.get('DB_USERNAME'),
                     password: configService.get('DB_PASSWORD'),
                     database: configService.get('DB_DATABASE'),
-                    entities: [Tiers, Users, Questions, Comments, ReComments],
-                    synchronize: true,
+                    entities: [
+                        Tiers,
+                        Users,
+                        Categories,
+                        CategoryUsers,
+                        Comments,
+                        CommentLikes,
+                        Questions,
+                        QuestionLikes,
+                        ReComments,
+                    ],
+                    synchronize: false,
                 };
             },
         }),

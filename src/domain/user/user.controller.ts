@@ -22,7 +22,7 @@ export class UserController {
     @Post('login')
     async login(@Body() loginUserDto: LoginUserDto, @Res({ passthrough: true }) response: Response): Promise<void> {
         const jwt = await this.userService.login(loginUserDto);
-        response.cookie('jwt', jwt.access_token, {
+            response.cookie('jwt', jwt.access_token, {
             httpOnly: true,
             maxAge: 24 * 60 * 60 * 1000, //1 day
         });
