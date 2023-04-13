@@ -19,7 +19,9 @@ export class ReCommentRepositoryImpl implements ReCommentRepository {
         return;
     }
 
-    findAllByCommentId(CommentId: number): Promise<ReComments[]> {
-        throw new Error('Method not implemented.');
+    async findAllByCommentId(CommentId: number): Promise<ReComments[]> {
+        return await this.recommentModel.find({
+            where: { CommentId },
+        });
     }
 }
