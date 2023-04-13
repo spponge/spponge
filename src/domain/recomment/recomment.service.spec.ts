@@ -40,6 +40,7 @@ class FakeReCommentRepository implements ReCommentRepository {
         return this.recomments.filter(recomment => recomment.CommentId === CommentId);
     }
     async update(id: number, updateReCommentDto: UpdateReCommentDto, userId: number): Promise<void> {}
+    async delete(id: number, userId: number): Promise<void> {}
 }
 
 describe('ReCommentService', () => {

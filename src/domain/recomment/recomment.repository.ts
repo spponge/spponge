@@ -31,4 +31,8 @@ export class ReCommentRepositoryImpl implements ReCommentRepository {
         await this.recommentModel.update({ id, UserId: userId }, { content });
         return;
     }
+
+    delete(id: number, userId: number): Promise<void> {
+        throw new Error('Method not implemented.');
+    }
 }
