@@ -36,7 +36,7 @@ class FakeReCommentRepository implements ReCommentRepository {
 
     async create(createReCommentDto: CreateReCommentDto, userId: number): Promise<void> {}
     async findAllByCommentId(CommentId: number): Promise<ReComments[]> {
-        throw new Error('Method not implemented.');
+        return this.recomments.filter(recomment => recomment.CommentId === CommentId);
     }
 }
 
@@ -66,6 +66,31 @@ describe('ReCommentService', () => {
             const userId = 1;
             const result = await recommentService.create(createReCommentDto, userId);
             expect(result).toBe(undefined);
+        });
+    });
+
+    describe('findAllByCommentId', () => {
+        it('해당하는 댓글의 모든 대댓글들을 가져와야 한다.', async () => {
+            const CommentId = 1;
+            const result = await recommentService.findAllByCommentId(CommentId);
+            expect(result).toEqual([
+                {
+                    id: 1,
+                    content: '대댓글1',
+                    CommentId: 1,
+                    UserId: 2,
+                    Users: null,
+                    Comments: null,
+                },
+                {
+                    id: 2,
+                    content: '대댓글2',
+                    CommentId: 1,
+                    UserId: 5,
+                    Users: null,
+                    Comments: null,
+                },
+            ]);
         });
     });
 });
