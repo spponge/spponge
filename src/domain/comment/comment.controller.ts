@@ -17,25 +17,27 @@ export class CommentController {
     @UseGuards(JwtAuthGuard)
     @Post()
     async create(@Body() createCommentDto: CreateCommentDto, @Req() req: Request): Promise<void> {
-        console.log('@@commentController', req.user);
         const user = req.user as Users;
         return await this.commentService.create(createCommentDto, user.id);
     }
 
     @ApiOperation({ summary: '댓글 수정 API' })
-    // @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Patch(':id')
     async update(
         @Param('id') id: number,
-        // @Req() req: Request & { user: JwtPayload },
         @Body() updateCommentDto: UpdateCommentDto,
+        @Req() req: Request,
     ): Promise<void> {
-        return await this.commentService.update(id, updateCommentDto);
+        const user = req.user as Users;
+        return await this.commentService.update(id, updateCommentDto, user.id);
     }
 
     @ApiOperation({ summary: '댓글 삭제 API' })
+    @UseGuards(JwtAuthGuard)
     @Delete(':id')
-    async delete(@Param('id') id: number): Promise<void> {
-        return await this.commentService.delete(id);
+    async delete(@Param('id') id: number, @Req() req: Request): Promise<void> {
+        const user = req.user as Users;
+        return await this.commentService.delete(id, user.id);
     }
 }

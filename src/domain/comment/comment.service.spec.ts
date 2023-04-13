@@ -17,6 +17,7 @@ class FakeCommentRepository implements CommentRepository {
             ReComments: [],
             Users: null,
             Questions: null,
+            CommentLikes: null,
         },
         {
             id: 2,
@@ -26,6 +27,7 @@ class FakeCommentRepository implements CommentRepository {
             ReComments: [],
             Users: null,
             Questions: null,
+            CommentLikes: null,
         },
         {
             id: 3,
@@ -35,18 +37,19 @@ class FakeCommentRepository implements CommentRepository {
             ReComments: [],
             Users: null,
             Questions: null,
+            CommentLikes: null,
         },
     ];
 
     async create(createCommentDto: CreateCommentDto, userId: number): Promise<void> {}
-
+    async findOne(commentId: number): Promise<Comments> {
+        return this.comments.find(comment => comment.id === commentId);
+    }
     async findAllByQuestionId(QuestionId: number): Promise<Comments[]> {
         return this.comments.filter(comment => comment.QuestionId === QuestionId);
     }
-
-    async update(id: number, updateCommentDto: UpdateCommentDto): Promise<void> {}
-
-    async delete(id: number): Promise<void> {}
+    async update(id: number, updateCommentDto: UpdateCommentDto, userId: number): Promise<void> {}
+    async delete(id: number, userId: number): Promise<void> {}
 }
 
 describe('CommentService', () => {
@@ -106,7 +109,8 @@ describe('CommentService', () => {
         it('댓글이 수정되어야 한다.', async () => {
             const updateCommentDto: UpdateCommentDto = { content: 'Test comment' };
             const id = 1;
-            const result = await commentService.update(id, updateCommentDto);
+            const userId = 4;
+            const result = await commentService.update(id, updateCommentDto, userId);
             expect(result).toBe(undefined);
         });
     });
@@ -114,7 +118,8 @@ describe('CommentService', () => {
     describe('delete', () => {
         it('댓글이 삭제되어야 한다.', async () => {
             const id = 1;
-            const result = await commentService.delete(id);
+            const userId = 4;
+            const result = await commentService.delete(id, userId);
             expect(result).toBe(undefined);
         });
     });

@@ -20,19 +20,25 @@ export class CommentRepositoryImpl implements CommentRepository {
         return;
     }
 
+    async findOne(commentId: number): Promise<Comments> {
+        return await this.commentModel.findOne({
+            where: { id: commentId },
+        });
+    }
+
     async findAllByQuestionId(QuestionId: number): Promise<Comments[]> {
         return await this.commentModel.find({
             where: { QuestionId },
         });
     }
 
-    async update(id: number, updateCommentDto: UpdateCommentDto): Promise<void> {
+    async update(id: number, updateCommentDto: UpdateCommentDto, userId: number): Promise<void> {
         const content = updateCommentDto.content;
-        await this.commentModel.update({ id }, { content });
+        await this.commentModel.update({ id, UserId: userId }, { content });
         return;
     }
 
-    async delete(id: number): Promise<void> {
-        await this.commentModel.delete({ id });
+    async delete(id: number, userId: number): Promise<void> {
+        await this.commentModel.delete({ id, UserId: userId });
     }
 }
