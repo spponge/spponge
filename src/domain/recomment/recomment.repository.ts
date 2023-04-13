@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ReComments } from 'src/entity/recomment.entities';
 import { Repository } from 'typeorm';
 import { CreateReCommentDto } from './dto/input/create-recomment.dto';
+import { UpdateReCommentDto } from './dto/input/update-recomment.dto';
 import { ReCommentRepository } from './recomment.repository.interface';
 
 @Injectable()
@@ -23,5 +24,9 @@ export class ReCommentRepositoryImpl implements ReCommentRepository {
         return await this.recommentModel.find({
             where: { CommentId },
         });
+    }
+
+    async update(updateReCommentDto: UpdateReCommentDto, userId: number): Promise<void> {
+        throw new Error('Method not implemented.');
     }
 }

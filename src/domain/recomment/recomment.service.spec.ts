@@ -3,6 +3,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ReComments } from 'src/entity/recomment.entities';
 import { CreateReCommentDto } from './dto/input/create-recomment.dto';
+import { UpdateReCommentDto } from './dto/input/update-recomment.dto';
 import { ReCommentRepository } from './recomment.repository.interface';
 import { ReCommentService } from './recomment.service';
 
@@ -38,6 +39,7 @@ class FakeReCommentRepository implements ReCommentRepository {
     async findAllByCommentId(CommentId: number): Promise<ReComments[]> {
         return this.recomments.filter(recomment => recomment.CommentId === CommentId);
     }
+    async update(updateReCommentDto: UpdateReCommentDto, userId: number): Promise<void> {}
 }
 
 describe('ReCommentService', () => {
