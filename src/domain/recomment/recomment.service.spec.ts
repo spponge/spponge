@@ -39,7 +39,7 @@ class FakeReCommentRepository implements ReCommentRepository {
     async findAllByCommentId(CommentId: number): Promise<ReComments[]> {
         return this.recomments.filter(recomment => recomment.CommentId === CommentId);
     }
-    async update(updateReCommentDto: UpdateReCommentDto, userId: number): Promise<void> {}
+    async update(id: number, updateReCommentDto: UpdateReCommentDto, userId: number): Promise<void> {}
 }
 
 describe('ReCommentService', () => {
@@ -93,6 +93,16 @@ describe('ReCommentService', () => {
                     Comments: null,
                 },
             ]);
+        });
+    });
+
+    describe('update', () => {
+        it('대댓글이 수정되어야 한다.', async () => {
+            const updateReCommentDto: UpdateReCommentDto = { content: '대댓글을 수정했어요.' };
+            const id = 1;
+            const UserId = 2;
+            const result = await recommentService.update(id, updateReCommentDto, UserId);
+            expect(result).toBe(undefined);
         });
     });
 });

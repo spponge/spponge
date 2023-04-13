@@ -5,6 +5,6 @@ import { UpdateReCommentDto } from './dto/input/update-recomment.dto';
 export interface ReCommentRepository {
     create(createReCommentDto: CreateReCommentDto, userId: number): Promise<void>;
     findAllByCommentId(CommentId: number): Promise<ReComments[]>;
-    update(updateReCommentDto: UpdateReCommentDto, userId: number): Promise<void>;
+    update(id: number, updateReCommentDto: UpdateReCommentDto, userId: number): Promise<void>;
 }
 export const ReCommentRepository = Symbol('ReCommentRepository');
