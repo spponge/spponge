@@ -35,6 +35,9 @@ class FakeReCommentRepository implements ReCommentRepository {
     ];
 
     async create(createReCommentDto: CreateReCommentDto, userId: number): Promise<void> {}
+    async findAllByCommentId(CommentId: number): Promise<ReComments[]> {
+        throw new Error('Method not implemented.');
+    }
 }
 
 describe('ReCommentService', () => {

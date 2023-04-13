@@ -18,4 +18,8 @@ export class ReCommentRepositoryImpl implements ReCommentRepository {
         await this.recommentModel.save(newReComment);
         return;
     }
+
+    findAllByCommentId(CommentId: number): Promise<ReComments[]> {
+        throw new Error('Method not implemented.');
+    }
 }
