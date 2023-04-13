@@ -20,6 +20,12 @@ export class ReCommentRepositoryImpl implements ReCommentRepository {
         return;
     }
 
+    async findOne(recommentId: number): Promise<ReComments> {
+        return await this.recommentModel.findOne({
+            where: { id: recommentId },
+        });
+    }
+
     async findAllByCommentId(CommentId: number): Promise<ReComments[]> {
         return await this.recommentModel.find({
             where: { CommentId },
@@ -32,7 +38,8 @@ export class ReCommentRepositoryImpl implements ReCommentRepository {
         return;
     }
 
-    delete(id: number, userId: number): Promise<void> {
-        throw new Error('Method not implemented.');
+    async delete(id: number, userId: number): Promise<void> {
+        await this.recommentModel.delete({ id, UserId: userId });
+        return;
     }
 }

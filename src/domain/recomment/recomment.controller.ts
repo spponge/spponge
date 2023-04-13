@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Patch, Req, UseGuards, Param } from '@nestjs/common';
+import { Body, Controller, Post, Patch, Delete, Req, UseGuards, Param } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { Request } from 'express';
 import { JwtAuthGuard } from 'src/common/auth/jwt/jwt.guard';
@@ -29,5 +29,13 @@ export class RecommentController {
     ): Promise<void> {
         const user = req.user as Users;
         return await this.recommentService.update(id, updateReCommentDto, user.id);
+    }
+
+    @ApiOperation({ summary: '대댓글 삭제 API' })
+    @UseGuards(JwtAuthGuard)
+    @Delete(':id')
+    async delete(@Param('id') id: number, @Req() req: Request): Promise<void> {
+        const user = req.user as Users;
+        return await this.recommentService.delete(id, user.id);
     }
 }
