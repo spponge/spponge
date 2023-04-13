@@ -106,4 +106,13 @@ describe('ReCommentService', () => {
             expect(result).toBe(undefined);
         });
     });
+
+    describe('delete', () => {
+        it('대댓글이 삭제되어야 한다.', async () => {
+            const id = 1;
+            const UserId = 2;
+            const result = await recommentService.delete(id, UserId);
+            expect(result).toBe(undefined);
+        });
+    });
 });

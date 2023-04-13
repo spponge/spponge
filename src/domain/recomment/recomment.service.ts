@@ -22,4 +22,8 @@ export class ReCommentService {
     async update(id: number, updateReCommentDto: UpdateReCommentDto, UserId: number): Promise<void> {
         return await this.recommentRepository.update(id, updateReCommentDto, UserId);
     }
+
+    async delete(id: number, UserId: number): Promise<void> {
+        return await this.recommentRepository.delete(id, UserId);
+    }
 }
