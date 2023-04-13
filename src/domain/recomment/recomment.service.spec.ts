@@ -36,6 +36,9 @@ class FakeReCommentRepository implements ReCommentRepository {
     ];
 
     async create(createReCommentDto: CreateReCommentDto, userId: number): Promise<void> {}
+    async findOne(recommentId: number): Promise<ReComments> {
+        return this.recomments.find(recomment => recomment.id === recommentId);
+    }
     async findAllByCommentId(CommentId: number): Promise<ReComments[]> {
         return this.recomments.filter(recomment => recomment.CommentId === CommentId);
     }

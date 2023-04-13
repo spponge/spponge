@@ -4,6 +4,7 @@ import { UpdateReCommentDto } from './dto/input/update-recomment.dto';
 
 export interface ReCommentRepository {
     create(createReCommentDto: CreateReCommentDto, userId: number): Promise<void>;
+    findOne(recommentId: number): Promise<ReComments>;
     findAllByCommentId(CommentId: number): Promise<ReComments[]>;
     update(id: number, updateReCommentDto: UpdateReCommentDto, userId: number): Promise<void>;
     delete(id: number, userId: number): Promise<void>;

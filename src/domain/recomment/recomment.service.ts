@@ -1,4 +1,5 @@
-import { Inject, Injectable } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { ReComments } from 'src/entity/recomment.entities';
 import { CreateReCommentDto } from './dto/input/create-recomment.dto';
 import { UpdateReCommentDto } from './dto/input/update-recomment.dto';
@@ -20,10 +21,24 @@ export class ReCommentService {
     }
 
     async update(id: number, updateReCommentDto: UpdateReCommentDto, UserId: number): Promise<void> {
+        const recomment = await this.recommentRepository.findOne(id);
+        if (!recomment) {
+            throw new NotFoundException('없는 댓글입니다.');
+        }
+        if (recomment.UserId !== UserId) {
+            throw new UnauthorizedException('수정 권한이 없습니다.');
+        }
         return await this.recommentRepository.update(id, updateReCommentDto, UserId);
     }
 
     async delete(id: number, UserId: number): Promise<void> {
+        const recomment = await this.recommentRepository.findOne(id);
+        if (!recomment) {
+            throw new NotFoundException('없는 댓글입니다.');
+        }
+        if (recomment.UserId !== UserId) {
+            throw new UnauthorizedException('삭제 권한이 없습니다.');
+        }
         return await this.recommentRepository.delete(id, UserId);
     }
 }
