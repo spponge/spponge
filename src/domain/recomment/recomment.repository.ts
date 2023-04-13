@@ -26,7 +26,9 @@ export class ReCommentRepositoryImpl implements ReCommentRepository {
         });
     }
 
-    async update(updateReCommentDto: UpdateReCommentDto, userId: number): Promise<void> {
-        throw new Error('Method not implemented.');
+    async update(id: number, updateReCommentDto: UpdateReCommentDto, userId: number): Promise<void> {
+        const content = updateReCommentDto.content;
+        await this.recommentModel.update({ id, UserId: userId }, { content });
+        return;
     }
 }
