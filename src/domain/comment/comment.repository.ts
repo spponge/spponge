@@ -11,11 +11,11 @@ import { UpdateCommentDto } from './dto/input/update-comment.dto';
 export class CommentRepositoryImpl implements CommentRepository {
     constructor(@InjectRepository(Comments) private commentModel: Repository<Comments>) {}
 
-    async create(createCommentDto: CreateCommentDto, userId: number): Promise<void> {
+    async create(createCommentDto: CreateCommentDto, UserId: number): Promise<void> {
         const newComment = await this.commentModel.create();
         newComment.content = createCommentDto.content;
         newComment.QuestionId = createCommentDto.questionId;
-        newComment.UserId = userId;
+        newComment.UserId = UserId;
         await this.commentModel.save(newComment);
         return;
     }

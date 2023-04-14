@@ -20,25 +20,25 @@ export class CommentService {
         return await this.commentRepository.findAllByQuestionId(QuestionId);
     }
 
-    async update(id: number, updateCommentDto: UpdateCommentDto, userId: number): Promise<void> {
-        const comment = await this.commentRepository.findOne(id);
+    async update(commentId: number, updateCommentDto: UpdateCommentDto, userId: number): Promise<void> {
+        const comment = await this.commentRepository.findOne(commentId);
         if (!comment) {
             throw new NotFoundException('없는 댓글입니다.');
         }
         if (comment.UserId !== userId) {
             throw new UnauthorizedException('수정 권한이 없습니다.');
         }
-        return await this.commentRepository.update(id, updateCommentDto, userId);
+        return await this.commentRepository.update(commentId, updateCommentDto, userId);
     }
 
-    async delete(id: number, userId): Promise<void> {
-        const comment = await this.commentRepository.findOne(id);
+    async delete(commentId: number, userId): Promise<void> {
+        const comment = await this.commentRepository.findOne(commentId);
         if (!comment) {
             throw new NotFoundException('없는 댓글입니다.');
         }
         if (comment.UserId !== userId) {
             throw new UnauthorizedException('삭제 권한이 없습니다.');
         }
-        return await this.commentRepository.delete(id, userId);
+        return await this.commentRepository.delete(commentId, userId);
     }
 }

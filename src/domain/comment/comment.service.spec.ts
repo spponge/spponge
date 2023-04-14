@@ -8,45 +8,37 @@ import { CreateCommentDto } from './dto/input/create-comment.dto';
 import { UpdateCommentDto } from './dto/input/update-comment.dto';
 
 class FakeCommentRepository implements CommentRepository {
-    private readonly comments: Comments[] = [
-        {
-            id: 1,
-            content: '댓글1',
-            QuestionId: 1,
-            UserId: 4,
-            ReComments: [],
-            Users: null,
-            Questions: null,
-            CommentLikes: null,
-        },
-        {
-            id: 2,
-            content: '댓글2',
-            QuestionId: 1,
-            UserId: 5,
-            ReComments: [],
-            Users: null,
-            Questions: null,
-            CommentLikes: null,
-        },
-        {
-            id: 3,
-            content: '댓글3',
-            QuestionId: 2,
-            UserId: 6,
-            ReComments: [],
-            Users: null,
-            Questions: null,
-            CommentLikes: null,
-        },
-    ];
+    private readonly comments: Comments[] = [];
 
     async create(createCommentDto: CreateCommentDto, userId: number): Promise<void> {}
     async findOne(commentId: number): Promise<Comments> {
         return this.comments.find(comment => comment.id === commentId);
     }
     async findAllByQuestionId(QuestionId: number): Promise<Comments[]> {
-        return this.comments.filter(comment => comment.QuestionId === QuestionId);
+        const result = [
+            {
+                id: 1,
+                content: '댓글1',
+                QuestionId: 1,
+                UserId: 4,
+                ReComments: [],
+                Users: null,
+                Questions: null,
+                // CommentLikes: null,
+            },
+            {
+                id: 2,
+                content: '댓글2',
+                QuestionId: 1,
+                UserId: 5,
+                ReComments: [],
+                Users: null,
+                Questions: null,
+                // CommentLikes: null,
+            },
+        ];
+        return result;
+        // return this.comments.filter(comment => comment.QuestionId === QuestionId);
     }
     async update(id: number, updateCommentDto: UpdateCommentDto, userId: number): Promise<void> {}
     async delete(id: number, userId: number): Promise<void> {}
@@ -88,18 +80,20 @@ describe('CommentService', () => {
                     content: '댓글1',
                     QuestionId: 1,
                     UserId: 4,
-                    Replies: [],
+                    ReComments: [],
                     Users: null,
                     Questions: null,
+                    // CommentLikes: null,
                 },
                 {
                     id: 2,
                     content: '댓글2',
                     QuestionId: 1,
                     UserId: 5,
-                    Replies: [],
+                    ReComments: [],
                     Users: null,
                     Questions: null,
+                    // CommentLikes: null,
                 },
             ]);
         });
