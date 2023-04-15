@@ -14,15 +14,15 @@ export class CommentRepositoryImpl implements CommentRepository {
     async create(createCommentDto: CreateCommentDto, UserId: number): Promise<void> {
         const newComment = await this.commentModel.create();
         newComment.content = createCommentDto.content;
-        newComment.QuestionId = createCommentDto.questionId;
+        newComment.QuestionId = createCommentDto.QuestionId;
         newComment.UserId = UserId;
         await this.commentModel.save(newComment);
         return;
     }
 
-    async findOne(commentId: number): Promise<Comments> {
+    async findOne(CommentId: number): Promise<Comments> {
         return await this.commentModel.findOne({
-            where: { id: commentId },
+            where: { id: CommentId },
         });
     }
 
@@ -32,13 +32,13 @@ export class CommentRepositoryImpl implements CommentRepository {
         });
     }
 
-    async update(id: number, updateCommentDto: UpdateCommentDto, userId: number): Promise<void> {
+    async update(CommentId: number, updateCommentDto: UpdateCommentDto, UserId: number): Promise<void> {
         const content = updateCommentDto.content;
-        await this.commentModel.update({ id, UserId: userId }, { content });
+        await this.commentModel.update({ id: CommentId, UserId }, { content });
         return;
     }
 
-    async delete(id: number, userId: number): Promise<void> {
-        await this.commentModel.delete({ id, UserId: userId });
+    async delete(CommentId: number, UserId: number): Promise<void> {
+        await this.commentModel.delete({ id: CommentId, UserId });
     }
 }

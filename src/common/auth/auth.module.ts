@@ -12,6 +12,7 @@ import { JwtStrategy } from './jwt/jwt.strategy';
             secret: 'my impooooooooooooooooortent secreeeeeeeeeeeeeeet',
             signOptions: { expiresIn: '60m' },
         }),
+        forwardRef(() => UserModule),
     ],
     providers: [JwtStrategy],
     exports: [JwtModule],

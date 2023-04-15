@@ -1,9 +1,8 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Post, Patch, Delete, Req, UseGuards, Param } from '@nestjs/common';
+import { Body, Controller, Post, Patch, Delete, UseGuards, Param } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Request } from 'express';
 import { JwtAuthGuard } from 'src/common/auth/jwt/jwt.guard';
-import { Users } from 'src/entity/user.entites';
+import { User } from 'src/common/decorator/user.decorator';
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/input/create-comment.dto';
 import { UpdateCommentDto } from './dto/input/update-comment.dto';
@@ -16,8 +15,7 @@ export class CommentController {
     @ApiOperation({ summary: '댓글 작성 API' })
     @UseGuards(JwtAuthGuard)
     @Post()
-    async create(@Body() createCommentDto: CreateCommentDto, @Req() req: Request): Promise<void> {
-        const user = req.user as Users;
+    async create(@Body() createCommentDto: CreateCommentDto, @User() user): Promise<void> {
         return await this.commentService.create(createCommentDto, user.id);
     }
 
@@ -27,17 +25,15 @@ export class CommentController {
     async update(
         @Param('id') CommentId: number,
         @Body() updateCommentDto: UpdateCommentDto,
-        @Req() req: Request,
+        @User() user,
     ): Promise<void> {
-        const user = req.user as Users;
         return await this.commentService.update(CommentId, updateCommentDto, user.id);
     }
 
     @ApiOperation({ summary: '댓글 삭제 API' })
     @UseGuards(JwtAuthGuard)
     @Delete(':id')
-    async delete(@Param('id') commentId: number, @Req() req: Request): Promise<void> {
-        const user = req.user as Users;
-        return await this.commentService.delete(commentId, user.id);
+    async delete(@Param('id') CommentId: number, @User() user): Promise<void> {
+        return await this.commentService.delete(CommentId, user.id);
     }
 }

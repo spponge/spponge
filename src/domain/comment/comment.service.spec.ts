@@ -8,8 +8,8 @@ import { CreateCommentDto } from './dto/input/create-comment.dto';
 import { UpdateCommentDto } from './dto/input/update-comment.dto';
 
 class FakeCommentRepository implements CommentRepository {
-    async create(createCommentDto: CreateCommentDto, userId: number): Promise<void> {}
-    async findOne(commentId: number): Promise<Comments> {
+    async create(createCommentDto: CreateCommentDto, UserId: number): Promise<void> {}
+    async findOne(CommentId: number): Promise<Comments> {
         const result = {
             id: 1,
             content: '댓글1',
@@ -47,8 +47,8 @@ class FakeCommentRepository implements CommentRepository {
         ];
         return result;
     }
-    async update(id: number, updateCommentDto: UpdateCommentDto, userId: number): Promise<void> {}
-    async delete(id: number, userId: number): Promise<void> {}
+    async update(CommentId: number, updateCommentDto: UpdateCommentDto, UserId: number): Promise<void> {}
+    async delete(CommentId: number, UserId: number): Promise<void> {}
 }
 
 describe('CommentService', () => {
@@ -70,9 +70,9 @@ describe('CommentService', () => {
 
     describe('create', () => {
         it('댓글이 생성되어야 한다.', async () => {
-            const createCommentDto: CreateCommentDto = { content: 'Test comment', questionId: 1 };
-            const user = 4;
-            const result = await commentService.create(createCommentDto, user);
+            const createCommentDto: CreateCommentDto = { content: 'Test comment', QuestionId: 1 };
+            const UserId = 4;
+            const result = await commentService.create(createCommentDto, UserId);
             expect(result).toBe(undefined);
         });
     });
@@ -109,9 +109,9 @@ describe('CommentService', () => {
     describe('update', () => {
         it('댓글이 수정되어야 한다.', async () => {
             const updateCommentDto: UpdateCommentDto = { content: 'Test comment' };
-            const id = 1;
-            const userId = 4;
-            const result = await commentService.update(id, updateCommentDto, userId);
+            const CommentId = 1;
+            const UserId = 4;
+            const result = await commentService.update(CommentId, updateCommentDto, UserId);
             expect(result).toBe(undefined);
         });
     });
@@ -119,8 +119,8 @@ describe('CommentService', () => {
     describe('delete', () => {
         it('댓글이 삭제되어야 한다.', async () => {
             const id = 1;
-            const userId = 4;
-            const result = await commentService.delete(id, userId);
+            const UserId = 4;
+            const result = await commentService.delete(id, UserId);
             expect(result).toBe(undefined);
         });
     });
