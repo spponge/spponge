@@ -9,7 +9,7 @@ import { PassportModule } from '@nestjs/passport';
 import { AuthModule } from 'src/common/auth/auth.module';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Users]), PassportModule, forwardRef(() => AuthModule)],
+    imports: [TypeOrmModule.forFeature([Users]), PassportModule],
     controllers: [UserController],
     providers: [UserService, UserRepository],
     exports: [TypeOrmModule, UserRepository],

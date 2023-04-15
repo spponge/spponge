@@ -25,12 +25,12 @@ export class CommentController {
     @UseGuards(JwtAuthGuard)
     @Patch(':id')
     async update(
-        @Param('id') commentId: number,
+        @Param('id') CommentId: number,
         @Body() updateCommentDto: UpdateCommentDto,
         @Req() req: Request,
     ): Promise<void> {
         const user = req.user as Users;
-        return await this.commentService.update(commentId, updateCommentDto, user.id);
+        return await this.commentService.update(CommentId, updateCommentDto, user.id);
     }
 
     @ApiOperation({ summary: '댓글 삭제 API' })
