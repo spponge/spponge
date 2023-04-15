@@ -11,18 +11,18 @@ import { IReCommentRepository } from './recomment.repository.interface';
 export class ReCommentRepository implements IReCommentRepository {
     constructor(@InjectRepository(ReComments) private recommentModel: Repository<ReComments>) {}
 
-    async create(createReCommentDto: CreateReCommentDto, userId: number): Promise<void> {
+    async create(createReCommentDto: CreateReCommentDto, UserId: number): Promise<void> {
         const newReComment = await this.recommentModel.create();
         newReComment.content = createReCommentDto.content;
         newReComment.CommentId = createReCommentDto.CommentId;
-        newReComment.UserId = userId;
+        newReComment.UserId = UserId;
         await this.recommentModel.save(newReComment);
         return;
     }
 
-    async findOne(recommentId: number): Promise<ReComments> {
+    async findOne(ReCommentId: number): Promise<ReComments> {
         return await this.recommentModel.findOne({
-            where: { id: recommentId },
+            where: { id: ReCommentId },
         });
     }
 
@@ -32,14 +32,14 @@ export class ReCommentRepository implements IReCommentRepository {
         });
     }
 
-    async update(id: number, updateReCommentDto: UpdateReCommentDto, userId: number): Promise<void> {
+    async update(ReCommentId: number, updateReCommentDto: UpdateReCommentDto, UserId: number): Promise<void> {
         const content = updateReCommentDto.content;
-        await this.recommentModel.update({ id, UserId: userId }, { content });
+        await this.recommentModel.update({ id: ReCommentId, UserId }, { content });
         return;
     }
 
-    async delete(id: number, userId: number): Promise<void> {
-        await this.recommentModel.delete({ id, UserId: userId });
+    async delete(ReCommentId: number, UserId: number): Promise<void> {
+        await this.recommentModel.delete({ id: ReCommentId, UserId });
         return;
     }
 }

@@ -3,10 +3,10 @@ import { CreateReCommentDto } from './dto/input/create-recomment.dto';
 import { UpdateReCommentDto } from './dto/input/update-recomment.dto';
 
 export interface IReCommentRepository {
-    create(createReCommentDto: CreateReCommentDto, userId: number): Promise<void>;
-    findOne(recommentId: number): Promise<ReComments>;
+    create(createReCommentDto: CreateReCommentDto, UserId: number): Promise<void>;
+    findOne(ReCommentId: number): Promise<ReComments>;
     findAllByCommentId(CommentId: number): Promise<ReComments[]>;
-    update(id: number, updateReCommentDto: UpdateReCommentDto, userId: number): Promise<void>;
-    delete(id: number, userId: number): Promise<void>;
+    update(ReCommentId: number, updateReCommentDto: UpdateReCommentDto, UserId: number): Promise<void>;
+    delete(ReCommentId: number, UserId: number): Promise<void>;
 }
 export const IReCommentRepository = Symbol('IReCommentRepository');
