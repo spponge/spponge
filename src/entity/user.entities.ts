@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { Comments } from './comment.entities';
-import { Questions } from './question.entites';
+import { Questions } from './question.entities';
 import { ReComments } from './recomment.entities';
-import { Tiers } from './tier.entites';
+import { Tiers } from './tier.entities';
 
 @Entity()
 @Unique(['email'])

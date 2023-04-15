@@ -9,10 +9,10 @@ import { CommentModule } from './domain/comment/comment.module';
 import { QuestionModule } from './domain/question/question.module';
 import { UserModule } from './domain/user/user.module';
 import { Comments } from './entity/comment.entities';
-import { Questions } from './entity/question.entites';
+import { Questions } from './entity/question.entities';
 import { ReComments } from './entity/recomment.entities';
-import { Tiers } from './entity/tier.entites';
-import { Users } from './entity/user.entites';
+import { Tiers } from './entity/tier.entities';
+import { Users } from './entity/user.entities';
 
 @Module({
     imports: [

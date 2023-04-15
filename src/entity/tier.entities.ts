@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Users } from './user.entites';
+import { Users } from './user.entities';
 
 @Entity()
 export class Tiers {
