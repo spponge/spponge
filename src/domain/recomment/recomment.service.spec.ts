@@ -8,42 +8,41 @@ import { IReCommentRepository } from './recomment.repository.interface';
 import { ReCommentService } from './recomment.service';
 
 class FakeReCommentRepository implements IReCommentRepository {
-    private readonly recomments: ReComments[] = [
-        {
+    async create(createReCommentDto: CreateReCommentDto, UserId: number): Promise<void> {}
+    async findOne(ReCommentId: number): Promise<ReComments> {
+        const result = {
             id: 1,
             content: '대댓글1',
             CommentId: 1,
             UserId: 2,
             Users: null,
             Comments: null,
-        },
-        {
-            id: 2,
-            content: '대댓글2',
-            CommentId: 1,
-            UserId: 5,
-            Users: null,
-            Comments: null,
-        },
-        {
-            id: 3,
-            content: '대댓글3',
-            CommentId: 2,
-            UserId: 7,
-            Users: null,
-            Comments: null,
-        },
-    ];
-
-    async create(createReCommentDto: CreateReCommentDto, userId: number): Promise<void> {}
-    async findOne(recommentId: number): Promise<ReComments> {
-        return this.recomments.find(recomment => recomment.id === recommentId);
+        };
+        return result;
     }
     async findAllByCommentId(CommentId: number): Promise<ReComments[]> {
-        return this.recomments.filter(recomment => recomment.CommentId === CommentId);
+        const result = [
+            {
+                id: 1,
+                content: '대댓글1',
+                CommentId: 1,
+                UserId: 2,
+                Users: null,
+                Comments: null,
+            },
+            {
+                id: 2,
+                content: '대댓글2',
+                CommentId: 1,
+                UserId: 5,
+                Users: null,
+                Comments: null,
+            },
+        ];
+        return result;
     }
-    async update(id: number, updateReCommentDto: UpdateReCommentDto, userId: number): Promise<void> {}
-    async delete(id: number, userId: number): Promise<void> {}
+    async update(ReCommentId: number, updateReCommentDto: UpdateReCommentDto, UserId: number): Promise<void> {}
+    async delete(ReCommentId: number, UserId: number): Promise<void> {}
 }
 
 describe('ReCommentService', () => {
@@ -69,8 +68,8 @@ describe('ReCommentService', () => {
                 content: 'Test recomment',
                 CommentId: 1,
             };
-            const userId = 1;
-            const result = await recommentService.create(createReCommentDto, userId);
+            const UserId = 1;
+            const result = await recommentService.create(createReCommentDto, UserId);
             expect(result).toBe(undefined);
         });
     });
@@ -103,18 +102,18 @@ describe('ReCommentService', () => {
     describe('update', () => {
         it('대댓글이 수정되어야 한다.', async () => {
             const updateReCommentDto: UpdateReCommentDto = { content: '대댓글을 수정했어요.' };
-            const id = 1;
+            const ReCommentId = 1;
             const UserId = 2;
-            const result = await recommentService.update(id, updateReCommentDto, UserId);
+            const result = await recommentService.update(ReCommentId, updateReCommentDto, UserId);
             expect(result).toBe(undefined);
         });
     });
 
     describe('delete', () => {
         it('대댓글이 삭제되어야 한다.', async () => {
-            const id = 1;
+            const ReCommentId = 1;
             const UserId = 2;
-            const result = await recommentService.delete(id, UserId);
+            const result = await recommentService.delete(ReCommentId, UserId);
             expect(result).toBe(undefined);
         });
     });
