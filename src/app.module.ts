@@ -5,45 +5,50 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './common/middleware/logger';
+import { CommentModule } from './domain/comment/comment.module';
 import { QuestionModule } from './domain/question/question.module';
 import { UserModule } from './domain/user/user.module';
-import { Tiers } from './entity/tier.entites';
-import { Users } from './entity/user.entites';
+import { Comments } from './entity/comment.entities';
+import { Questions } from './entity/question.entities';
+import { ReComments } from './entity/recomment.entities';
+import { Tiers } from './entity/tier.entities';
+import { Users } from './entity/user.entities';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-    TypeOrmModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => {
-        return {
-          type: 'mysql',
-          host: 'localhost',
-          // host: '192.168.1.35',
-          // host: 'host.docker.internal',
-          // host: 'mysql-server',
-          port: 3306,
-          username: configService.get('DB_USERNAME'),
-          password: configService.get('DB_PASSWORD'),
-          database: configService.get('DB_DATABASE'),
-          entities: [Tiers, Users],
-          synchronize: true,
-        };
-      },
-    }),
-    UserModule,
-    QuestionModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        ConfigModule.forRoot({
+            isGlobal: true,
+        }),
+        TypeOrmModule.forRootAsync({
+            inject: [ConfigService],
+            useFactory: async (configService: ConfigService) => {
+                return {
+                    type: 'mysql',
+                    host: 'localhost',
+                    // host: '192.168.1.35',
+                    // host: 'host.docker.internal',
+                    // host: 'mysql-server',
+                    port: 3306,
+                    username: configService.get('DB_USERNAME'),
+                    password: configService.get('DB_PASSWORD'),
+                    database: configService.get('DB_DATABASE'),
+                    entities: [Tiers, Users, Questions, Comments, ReComments],
+                    synchronize: true,
+                };
+            },
+        }),
+        UserModule,
+        QuestionModule,
+        CommentModule,
+    ],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer): any {
-    consumer
-      .apply(LoggerMiddleware)
-      // .exclude({ path: '/', method: RequestMethod.GET })
-      .forRoutes('*');
-  }
+    configure(consumer: MiddlewareConsumer): any {
+        consumer
+            .apply(LoggerMiddleware)
+            // .exclude({ path: '/', method: RequestMethod.GET })
+            .forRoutes('*');
+    }
 }

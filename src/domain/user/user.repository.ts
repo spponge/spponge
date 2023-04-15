@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Users } from 'src/entity/user.entites';
+import { Users } from 'src/entity/user.entities';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/input/create-user.dto';
 import { LoginUserDto } from './dto/input/login-user.dto';
@@ -39,5 +39,14 @@ export class UserRepository {
                 email,
             },
         });
+    }
+
+    async findUserByIdWithoutPassword(userId: number): Promise<Users | null> {
+        const user = await this.userModel
+            .createQueryBuilder('user')
+            .select(['user.id', 'user.email', 'user.nickName'])
+            .where('user.id = :id', { id: userId })
+            .getOne();
+        return user;
     }
 }
