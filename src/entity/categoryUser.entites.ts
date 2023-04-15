@@ -18,18 +18,16 @@ export class CategoryUsers {
   UserId: number;
   @Column({ type: 'int', name: 'CategoryId' })
   CategoryId: number;
-  // Relations
-  @ManyToOne(() => Users, (Users) => Users.CategoryUsers, {
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
+  // @ManyToOne(() => Users, (Users) => Users.CategoryUsers, {
+  //   onDelete: 'CASCADE',
+  //   onUpdate: 'CASCADE',
+  // })
+  // @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
+  // Users: Users;
   @ManyToOne(() => Categories, (Categories) => Categories.CategoryUsers, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  // Joins
-  @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
-  Users: Users;
   @JoinColumn([{ name: 'CategoryId', referencedColumnName: 'id' }])
   Categories: Categories;
 }

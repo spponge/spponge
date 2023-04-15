@@ -13,9 +13,9 @@ export default setSeederFactory(Users, (faker) => {
   user.nickName = faker.internet.userName();
 
   // Tier Entity와의 관계 설정
-  const tier = new Tiers();
-  tier.tierName = faker.animal.type();
-  user.Tiers = tier;
+  // const tier = new Tiers();
+  // tier.tierName = faker.animal.type();
+  // user.Tiers = tier;
 
   return user;
 })

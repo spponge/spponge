@@ -9,12 +9,12 @@ export default setSeederFactory(CategoryUsers, (faker) => {
   faker.locale = 'ko';
 
   // 관계설정
-  const user = new Users();
-  user.email = faker.internet.email();
-  user.password = faker.internet.password();
-  user.point = faker.datatype.number({ min: 0, max: 1000 });
-  user.nickName = faker.internet.userName();
-  categoryUser.Users = user;
+  // const user = new Users();
+  // user.email = faker.internet.email();
+  // user.password = faker.internet.password();
+  // user.point = faker.datatype.number({ min: 0, max: 1000 });
+  // user.nickName = faker.internet.userName();
+  // categoryUser.Users = user;
 
   const category = new Categories();
   // 랜덤 카테고리 값 배열

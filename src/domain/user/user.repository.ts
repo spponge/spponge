@@ -16,7 +16,7 @@ export class UserRepository {
         newUser.password = createUserDto.password;
         newUser.nickName = createUserDto.nickName;
         newUser.point = 0;
-        newUser.TierId = 1;
+        // newUser.TierId = 1;
         await this.userModel.save(newUser);
         return;
     }

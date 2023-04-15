@@ -8,6 +8,7 @@ import { Users } from "./entity/user.entites";
   const options: DataSourceOptions & SeederOptions = {
     type: "mysql",
     host: "localhost",
+    database: 'spponge',
     username: 'user',
     password: '1080',
     entities: [Users],

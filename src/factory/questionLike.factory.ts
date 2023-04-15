@@ -14,12 +14,12 @@ export default setSeederFactory(QuestionLikes, (faker) => {
   question.content = faker.lorem.paragraph();
   questionLike.Questions = question;
 
-  const user = new Users();
-  user.email = faker.internet.email();
-  user.password = faker.internet.password();
-  user.point = faker.datatype.number({ min: 0, max: 1000 });
-  user.nickName = faker.internet.userName();
-  questionLike.Users = user;
+  // const user = new Users();
+  // user.email = faker.internet.email();
+  // user.password = faker.internet.password();
+  // user.point = faker.datatype.number({ min: 0, max: 1000 });
+  // user.nickName = faker.internet.userName();
+  // questionLike.Users = user;
 
   return questionLike;
 });

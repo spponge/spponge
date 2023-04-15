@@ -20,17 +20,16 @@ export class CommentLikes {
   @Column({ type: 'int', name: 'UserId' })
   UserId: number;
   // Relations
-  @ManyToOne(() => Users, (Users) => Users.CommentLikes, {
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
+  // @ManyToOne(() => Users, (Users) => Users.CommentLikes, {
+  //   onDelete: 'CASCADE',
+  //   onUpdate: 'CASCADE',
+  // })
+  // @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
+  // Users: Users;
   @ManyToOne(() => Comments, (Comments) => Comments.CommentLikes, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  // Joins
-  @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
-  Users: Users;
   @JoinColumn([{ name: 'CommentId', referencedColumnName: 'id' }])
   Comments: Comments;
 }

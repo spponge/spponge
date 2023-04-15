@@ -29,17 +29,16 @@ export class Comments {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  @ManyToOne(() => Users, Users => Users.Comments, {
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
+  @JoinColumn([{ name: 'QuestionId', referencedColumnName: 'id' }])
+  Questions: Questions;
+  // @ManyToOne(() => Users, Users => Users.Comments, {
+  //   onDelete: 'CASCADE',
+  //   onUpdate: 'CASCADE',
+  // })
+  // @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
+  // Users: Users;
   @OneToMany(() => ReComments, (reComment) => reComment.Comments)
   ReComments: ReComments[];
   @OneToMany(() => CommentLikes, (CommentLikes)=>CommentLikes.Comments)
   CommentLikes: CommentLikes
-  // Joins
-  @JoinColumn([{ name: 'QuestionId', referencedColumnName: 'id' }])
-  Questions: Questions;
-  @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
-  Users: Users;
 }
