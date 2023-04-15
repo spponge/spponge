@@ -2,12 +2,12 @@
 /* eslint-disable prettier/prettier */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Comments } from 'src/entity/comment.entities';
-import { CommentRepository } from './comment.repository.interface';
+import { ICommentRepository } from './comment.repository.interface';
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/input/create-comment.dto';
 import { UpdateCommentDto } from './dto/input/update-comment.dto';
 
-class FakeCommentRepository implements CommentRepository {
+class FakeCommentRepository implements ICommentRepository {
     async create(createCommentDto: CreateCommentDto, UserId: number): Promise<void> {}
     async findOne(CommentId: number): Promise<Comments> {
         const result = {
@@ -18,7 +18,7 @@ class FakeCommentRepository implements CommentRepository {
             ReComments: [],
             Users: null,
             Questions: null,
-            // CommentLikes: null,
+            CommentLikes: null,
         };
         return result;
     }
@@ -32,7 +32,7 @@ class FakeCommentRepository implements CommentRepository {
                 ReComments: [],
                 Users: null,
                 Questions: null,
-                // CommentLikes: null,
+                CommentLikes: null,
             },
             {
                 id: 2,
@@ -42,7 +42,7 @@ class FakeCommentRepository implements CommentRepository {
                 ReComments: [],
                 Users: null,
                 Questions: null,
-                // CommentLikes: null,
+                CommentLikes: null,
             },
         ];
         return result;
@@ -59,7 +59,7 @@ describe('CommentService', () => {
             providers: [
                 CommentService,
                 {
-                    provide: CommentRepository,
+                    provide: ICommentRepository,
                     useClass: FakeCommentRepository,
                 },
             ],

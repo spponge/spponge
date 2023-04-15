@@ -4,10 +4,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ReComments } from 'src/entity/recomment.entities';
 import { CreateReCommentDto } from './dto/input/create-recomment.dto';
 import { UpdateReCommentDto } from './dto/input/update-recomment.dto';
-import { ReCommentRepository } from './recomment.repository.interface';
+import { IReCommentRepository } from './recomment.repository.interface';
 import { ReCommentService } from './recomment.service';
 
-class FakeReCommentRepository implements ReCommentRepository {
+class FakeReCommentRepository implements IReCommentRepository {
     private readonly recomments: ReComments[] = [
         {
             id: 1,
@@ -54,7 +54,7 @@ describe('ReCommentService', () => {
             providers: [
                 ReCommentService,
                 {
-                    provide: ReCommentRepository,
+                    provide: IReCommentRepository,
                     useClass: FakeReCommentRepository,
                 },
             ],

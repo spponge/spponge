@@ -5,10 +5,10 @@ import { ReComments } from 'src/entity/recomment.entities';
 import { Repository } from 'typeorm';
 import { CreateReCommentDto } from './dto/input/create-recomment.dto';
 import { UpdateReCommentDto } from './dto/input/update-recomment.dto';
-import { ReCommentRepository } from './recomment.repository.interface';
+import { IReCommentRepository } from './recomment.repository.interface';
 
 @Injectable()
-export class ReCommentRepositoryImpl implements ReCommentRepository {
+export class ReCommentRepository implements IReCommentRepository {
     constructor(@InjectRepository(ReComments) private recommentModel: Repository<ReComments>) {}
 
     async create(createReCommentDto: CreateReCommentDto, userId: number): Promise<void> {

@@ -3,13 +3,13 @@ import { Inject, Injectable, NotFoundException, UnauthorizedException } from '@n
 import { ReComments } from 'src/entity/recomment.entities';
 import { CreateReCommentDto } from './dto/input/create-recomment.dto';
 import { UpdateReCommentDto } from './dto/input/update-recomment.dto';
-import { ReCommentRepository } from './recomment.repository.interface';
+import { IReCommentRepository } from './recomment.repository.interface';
 
 @Injectable()
 export class ReCommentService {
     constructor(
-        @Inject(ReCommentRepository)
-        private readonly recommentRepository: ReCommentRepository,
+        @Inject(IReCommentRepository)
+        private readonly recommentRepository: IReCommentRepository,
     ) {}
 
     async create(createReCommentDto: CreateReCommentDto, UserId: number): Promise<void> {

@@ -1,15 +1,15 @@
 /* eslint-disable prettier/prettier */
 import { Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { Comments } from 'src/entity/comment.entities';
-import { CommentRepository } from './comment.repository.interface';
+import { ICommentRepository } from './comment.repository.interface';
 import { CreateCommentDto } from './dto/input/create-comment.dto';
 import { UpdateCommentDto } from './dto/input/update-comment.dto';
 
 @Injectable()
 export class CommentService {
     constructor(
-        @Inject(CommentRepository)
-        private readonly commentRepository: CommentRepository,
+        @Inject(ICommentRepository)
+        private readonly commentRepository: ICommentRepository,
     ) {}
 
     async create(createCommentDto: CreateCommentDto, UserId: number): Promise<void> {
