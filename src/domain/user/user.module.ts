@@ -1,22 +1,17 @@
 /* eslint-disable prettier/prettier */
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Users } from 'src/entity/user.entites';
+import { Users } from 'src/entity/user.entities';
 import { UserRepository } from './user.repository';
 import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
+import { AuthModule } from 'src/common/auth/auth.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Users]),
-    PassportModule,
-    JwtModule.register({
-      secret: "my impooooooooooooooooortent secreeeeeeeeeeeeeeet",
-      signOptions: { expiresIn: '60s' },
-    }),],
-  controllers: [UserController],
-  providers: [UserService, UserRepository]
+    imports: [TypeOrmModule.forFeature([Users]), PassportModule, forwardRef(() => AuthModule)],
+    controllers: [UserController],
+    providers: [UserService, UserRepository],
+    exports: [TypeOrmModule, UserRepository],
 })
 export class UserModule {}
