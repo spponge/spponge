@@ -15,7 +15,6 @@ export class UserService {
         const { email, password, confirmPassword, nickName } = createUserDto;
         const checkDuplicatedUser = await this.userRepository.findUser({ email, password });
         if (checkDuplicatedUser) {
-            console.log('here!!');
             throw new Error('이미 존재하는 계정입니다.');
         }
         if (password !== confirmPassword) {
@@ -29,7 +28,6 @@ export class UserService {
     async login(loginUserDto: LoginUserDto): Promise<LoginOutputDto> {
         const { password } = loginUserDto;
         const user = await this.userRepository.findUser(loginUserDto);
-        console.log(`@@userService user: ${user.password}`);
         if (!user) {
             throw new UnauthorizedException('로그인에 실패하였습니다.');
         }

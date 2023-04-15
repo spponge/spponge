@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
-import { Tiers } from './tier.entites';
-import { CategoryUsers } from './categoryUser.entites';
-import { Categories } from './category.entites';
-import { Questions } from './question.entites';
-import { QuestionLikes } from './questionLike.entites';
+import { Tiers } from './tier.entities';
+import { CategoryUsers } from './categoryUser.entities';
+import { Categories } from './category.entities';
+import { Questions } from './question.entities';
+import { QuestionLikes } from './questionLike.entities';
 import { Comments } from './comment.entities';
 import { ReComments } from './recomment.entities';
-import { CommentLikes } from './commentLike.entites';
+import { CommentLikes } from './commentLike.entities';
 @Entity()
 @Unique(['email'])
 export class Users {

@@ -11,13 +11,19 @@ import { UpdateCommentDto } from './dto/input/update-comment.dto';
 export class CommentRepositoryImpl implements CommentRepository {
     constructor(@InjectRepository(Comments) private commentModel: Repository<Comments>) {}
 
-    async create(createCommentDto: CreateCommentDto, userId: number): Promise<void> {
+    async create(createCommentDto: CreateCommentDto, UserId: number): Promise<void> {
         const newComment = await this.commentModel.create();
         newComment.content = createCommentDto.content;
-        newComment.QuestionId = createCommentDto.questionId;
-        newComment.UserId = userId;
+        newComment.QuestionId = createCommentDto.QuestionId;
+        newComment.UserId = UserId;
         await this.commentModel.save(newComment);
         return;
+    }
+
+    async findOne(CommentId: number): Promise<Comments> {
+        return await this.commentModel.findOne({
+            where: { id: CommentId },
+        });
     }
 
     async findAllByQuestionId(QuestionId: number): Promise<Comments[]> {
@@ -26,13 +32,13 @@ export class CommentRepositoryImpl implements CommentRepository {
         });
     }
 
-    async update(id: number, updateCommentDto: UpdateCommentDto): Promise<void> {
+    async update(CommentId: number, updateCommentDto: UpdateCommentDto, UserId: number): Promise<void> {
         const content = updateCommentDto.content;
-        await this.commentModel.update({ id }, { content });
+        await this.commentModel.update({ id: CommentId, UserId }, { content });
         return;
     }
 
-    async delete(id: number): Promise<void> {
-        await this.commentModel.delete({ id });
+    async delete(CommentId: number, UserId: number): Promise<void> {
+        await this.commentModel.delete({ id: CommentId, UserId });
     }
 }

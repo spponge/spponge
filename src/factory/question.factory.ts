@@ -1,8 +1,8 @@
 import { setSeederFactory } from 'typeorm-extension';
-import { Questions } from '../entity/question.entites';
+import { Questions } from '../entity/question.entities';
 import { Comments } from '../entity/comment.entities';
-import { Users } from '../entity/user.entites';
-import { QuestionLikes } from '../entity/questionLike.entites';
+import { Users } from '../entity/user.entities';
+import { QuestionLikes } from '../entity/questionLike.entities';
 
 export default setSeederFactory(Questions, faker => {
     const question = new Questions();

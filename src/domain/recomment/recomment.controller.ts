@@ -2,7 +2,7 @@ import { Body, Controller, Post, Patch, Delete, Req, UseGuards, Param } from '@n
 import { ApiOperation } from '@nestjs/swagger';
 import { Request } from 'express';
 import { JwtAuthGuard } from 'src/common/auth/jwt/jwt.guard';
-import { Users } from 'src/entity/user.entites';
+import { Users } from 'src/entity/user.entities';
 import { CreateReCommentDto } from './dto/input/create-recomment.dto';
 import { UpdateReCommentDto } from './dto/input/update-recomment.dto';
 import { ReCommentService } from './recomment.service';

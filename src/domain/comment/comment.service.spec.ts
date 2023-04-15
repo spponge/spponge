@@ -8,8 +8,9 @@ import { CreateCommentDto } from './dto/input/create-comment.dto';
 import { UpdateCommentDto } from './dto/input/update-comment.dto';
 
 class FakeCommentRepository implements CommentRepository {
-    private readonly comments: Comments[] = [
-        {
+    async create(createCommentDto: CreateCommentDto, UserId: number): Promise<void> {}
+    async findOne(CommentId: number): Promise<Comments> {
+        const result = {
             id: 1,
             content: '댓글1',
             QuestionId: 1,
@@ -17,36 +18,37 @@ class FakeCommentRepository implements CommentRepository {
             ReComments: [],
             Users: null,
             Questions: null,
-        },
-        {
-            id: 2,
-            content: '댓글2',
-            QuestionId: 1,
-            UserId: 5,
-            ReComments: [],
-            Users: null,
-            Questions: null,
-        },
-        {
-            id: 3,
-            content: '댓글3',
-            QuestionId: 2,
-            UserId: 6,
-            ReComments: [],
-            Users: null,
-            Questions: null,
-        },
-    ];
-
-    async create(createCommentDto: CreateCommentDto, userId: number): Promise<void> {}
-
-    async findAllByQuestionId(QuestionId: number): Promise<Comments[]> {
-        return this.comments.filter(comment => comment.QuestionId === QuestionId);
+            // CommentLikes: null,
+        };
+        return result;
     }
-
-    async update(id: number, updateCommentDto: UpdateCommentDto): Promise<void> {}
-
-    async delete(id: number): Promise<void> {}
+    async findAllByQuestionId(QuestionId: number): Promise<Comments[]> {
+        const result = [
+            {
+                id: 1,
+                content: '댓글1',
+                QuestionId: 1,
+                UserId: 4,
+                ReComments: [],
+                Users: null,
+                Questions: null,
+                // CommentLikes: null,
+            },
+            {
+                id: 2,
+                content: '댓글2',
+                QuestionId: 1,
+                UserId: 5,
+                ReComments: [],
+                Users: null,
+                Questions: null,
+                // CommentLikes: null,
+            },
+        ];
+        return result;
+    }
+    async update(CommentId: number, updateCommentDto: UpdateCommentDto, UserId: number): Promise<void> {}
+    async delete(CommentId: number, UserId: number): Promise<void> {}
 }
 
 describe('CommentService', () => {
@@ -68,9 +70,9 @@ describe('CommentService', () => {
 
     describe('create', () => {
         it('댓글이 생성되어야 한다.', async () => {
-            const createCommentDto: CreateCommentDto = { content: 'Test comment', questionId: 1 };
-            const user = 4;
-            const result = await commentService.create(createCommentDto, user);
+            const createCommentDto: CreateCommentDto = { content: 'Test comment', QuestionId: 1 };
+            const UserId = 4;
+            const result = await commentService.create(createCommentDto, UserId);
             expect(result).toBe(undefined);
         });
     });
@@ -85,18 +87,20 @@ describe('CommentService', () => {
                     content: '댓글1',
                     QuestionId: 1,
                     UserId: 4,
-                    Replies: [],
+                    ReComments: [],
                     Users: null,
                     Questions: null,
+                    // CommentLikes: null,
                 },
                 {
                     id: 2,
                     content: '댓글2',
                     QuestionId: 1,
                     UserId: 5,
-                    Replies: [],
+                    ReComments: [],
                     Users: null,
                     Questions: null,
+                    // CommentLikes: null,
                 },
             ]);
         });
@@ -105,8 +109,9 @@ describe('CommentService', () => {
     describe('update', () => {
         it('댓글이 수정되어야 한다.', async () => {
             const updateCommentDto: UpdateCommentDto = { content: 'Test comment' };
-            const id = 1;
-            const result = await commentService.update(id, updateCommentDto);
+            const CommentId = 1;
+            const UserId = 4;
+            const result = await commentService.update(CommentId, updateCommentDto, UserId);
             expect(result).toBe(undefined);
         });
     });
@@ -114,7 +119,8 @@ describe('CommentService', () => {
     describe('delete', () => {
         it('댓글이 삭제되어야 한다.', async () => {
             const id = 1;
-            const result = await commentService.delete(id);
+            const UserId = 4;
+            const result = await commentService.delete(id, UserId);
             expect(result).toBe(undefined);
         });
     });

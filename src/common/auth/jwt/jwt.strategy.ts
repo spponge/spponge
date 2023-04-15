@@ -3,7 +3,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { UserRepository } from 'src/domain/user/user.repository';
-import { Users } from 'src/entity/user.entites';
+import { Users } from 'src/entity/user.entities';
 import { Payload } from './jwt.payload';
 
 @Injectable()
@@ -18,7 +18,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     async validate(payload: Payload): Promise<Users> {
         const user = await this.userRepository.findUserByIdWithoutPassword(payload.sub);
-        console.log('@@jwtValidate', user);
         if (user) {
             return user;
         } else {

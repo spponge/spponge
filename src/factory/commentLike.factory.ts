@@ -1,7 +1,7 @@
 import { setSeederFactory } from 'typeorm-extension';
-import { CommentLikes } from '../entity/commentLike.entites';
+import { CommentLikes } from '../entity/commentLike.entities';
 import { Comments } from '../entity/comment.entities';
-import { Users } from '../entity/user.entites';
+import { Users } from '../entity/user.entities';
 
 export default setSeederFactory(CommentLikes, faker => {
     const commentLike = new CommentLikes();

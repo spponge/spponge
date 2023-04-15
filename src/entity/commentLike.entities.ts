@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
-import { Users } from './user.entites';
+import { Users } from './user.entities';
 import { Comments } from './comment.entities';
 
 // CommentLike Entity

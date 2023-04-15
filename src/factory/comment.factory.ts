@@ -1,7 +1,7 @@
 import { setSeederFactory } from 'typeorm-extension';
 import { Comments } from '../entity/comment.entities';
-import { Questions } from '../entity/question.entites';
-import { Users } from '../entity/user.entites';
+import { Questions } from '../entity/question.entities';
+import { Users } from '../entity/user.entities';
 
 export default setSeederFactory(Comments, faker => {
     const comment = new Comments();
