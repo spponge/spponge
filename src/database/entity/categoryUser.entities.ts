@@ -1,5 +1,4 @@
-/*
-/!* eslint-disable prettier/prettier *!/
+/* eslint-disable prettier/prettier */
 import {
   Column,
   Entity,
@@ -31,4 +30,4 @@ export class CategoryUsers {
   })
   @JoinColumn([{ name: 'CategoryId', referencedColumnName: 'id' }])
   Categories: Categories;
-}*/
+}

@@ -3,7 +3,7 @@ import {
   Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique
 } from "typeorm";
 import { Tiers } from './tier.entities';
-// import { CategoryUsers } from './categoryUser.entities';
+import { CategoryUsers } from './categoryUser.entities';
 // import { Categories } from './category.entities';
 // import { Questions } from './question.entities';
 // import { QuestionLikes } from './questionLike.entities';
@@ -31,8 +31,8 @@ export class Users {
   })
   @JoinColumn([{ name: 'TierId', referencedColumnName: 'id' }])
   Tiers: Tiers;
-  // @OneToMany(() => CategoryUsers, (CategoryUsers) => CategoryUsers.Users)
-  // CategoryUsers:CategoryUsers
+  @OneToMany(() => CategoryUsers, (CategoryUsers) => CategoryUsers.Users)
+  CategoryUsers:CategoryUsers
   // @OneToMany(() => Questions, (Questions) => Questions.Users)
   // Questions:Questions[]
   // @OneToMany(() => QuestionLikes, (QuestionLikes) => QuestionLikes.Users)

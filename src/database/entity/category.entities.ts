@@ -1,5 +1,4 @@
-/*
-/!* eslint-disable prettier/prettier *!/
+/* eslint-disable prettier/prettier */
 import {
   Column,
   Entity,
@@ -26,4 +25,4 @@ export class Categories {
   // 다대다 지양
   // @ManyToMany(() => Users, (Users) => Users.Categories)
   // Users: Users[];
-}*/
+}
