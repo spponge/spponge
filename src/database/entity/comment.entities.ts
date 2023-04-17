@@ -48,8 +48,8 @@ export class Comments {
     const commentRepository = dataSource.getRepository(Comments);
     return await commentRepository
       .createQueryBuilder('comment')
-      .select('id')
-      .orderBy('RANDOM()')
+      .select('comment.id')
+      .orderBy('RAND()')
       .getOne();
   }
 }

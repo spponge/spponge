@@ -5,11 +5,11 @@ import { Users } from "../entity/user.entities";
 
 export default setSeederFactory(QuestionLikes, async (faker) => {
   const questionLike = new QuestionLikes();
-  const question = new Questions().getRandomQuestion();
+  const question = await new Questions().getRandomQuestion();
   const user = await new Users().getRandomUser();
 
-  questionLike.QuestionId = question[0].id;
-  questionLike.UserId = user[0].id;
+  questionLike.QuestionId = question.id;
+  questionLike.UserId = user.id;
 
   return questionLike;
 });

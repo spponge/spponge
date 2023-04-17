@@ -1,11 +1,10 @@
 /* eslint-disable prettier/prettier */
 import {
-  Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique
+  Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique
 } from "typeorm";
 import { Tiers } from './tier.entities';
-import { CategoryUsers } from './categoryUser.entities';
-import { Categories } from './category.entities';
 
+import { CategoryUsers } from './categoryUser.entities';
 import { Questions } from './question.entities';
 import { QuestionLikes } from './questionLike.entities';
 import { Comments } from './comment.entities';
@@ -13,7 +12,7 @@ import { CommentLikes } from './commentLike.entities';
 import { ReComments } from "./recomment.entities";
 import { dataSource } from "../../../data-source";
 
-@Entity()
+@Entity('User')
 @Unique(['email'])
 export class Users {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
@@ -34,9 +33,6 @@ export class Users {
   })
   @JoinColumn([{ name: 'TierId', referencedColumnName: 'id' }])
   Tiers: Tiers;
-  @OneToMany(() => CategoryUsers, (CategoryUsers) => CategoryUsers.Users)
-  CategoryUsers:CategoryUsers
-
   @OneToMany(() => Questions, (Questions) => Questions.Users)
   Questions:Questions[]
   @OneToMany(() => QuestionLikes, (QuestionLikes) => QuestionLikes.Users)
@@ -47,14 +43,16 @@ export class Users {
   CommentLikes:CommentLikes[]
   @OneToMany(() => ReComments, (ReComments) => ReComments.Users)
   ReComments:ReComments[]
+  @OneToMany(() => CategoryUsers, (CategoryUsers) => CategoryUsers.Users)
+  CategoryUsers:CategoryUsers[]
 
   public async getRandomUser():Promise<Users> {
     // Tier Entity와의 관계 설정
     const userRepository = dataSource.getRepository(Users);
     return await userRepository
       .createQueryBuilder('user')
-      .select('id')
-      .orderBy('RANDOM()')
+      .select('user.id')
+      .orderBy('RAND()')
       .getOne();
   }
 }

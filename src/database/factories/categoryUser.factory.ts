@@ -9,8 +9,8 @@ export default setSeederFactory(CategoryUsers, async (faker) => {
   const category = await new Categories().getRandomCategory();
 
   // 관계설정
-  categoryUser.UserId =  user[0].id
-  category.category = category[0].id
+  categoryUser.UserId =  user.id;
+  categoryUser.CategoryId = category.id;
 
   return categoryUser;
 })

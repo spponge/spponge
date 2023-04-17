@@ -3,16 +3,16 @@ import { ReComments } from '../entity/recomment.entities';
 import { Comments } from "../entity/comment.entities";
 import { Users } from "../entity/user.entities";
 
-export default setSeederFactory(ReComments, (faker) => {
-  const recomment = new ReComments();
-  const comment = new Comments().getRandomComment();
-  const user = new Users().getRandomUser();
+export default setSeederFactory(ReComments, async (faker) => {
+  const reComment = new ReComments();
+  const comment = await new Comments().getRandomComment();
+  const user = await  new Users().getRandomUser();
 
   faker.locale = 'ko';
 
-  recomment.content = faker.lorem.sentence();
-  recomment.CommentId = comment[0].id;
-  recomment.UserId = user[0].id;
+  reComment.content = faker.lorem.sentence();
+  reComment.CommentId = comment.id;
+  reComment.UserId = user.id;
 
-  return recomment;
+  return reComment;
 })

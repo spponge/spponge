@@ -40,8 +40,8 @@ export class Questions {
     const questionRepository = dataSource.getRepository(Questions);
     return await questionRepository
       .createQueryBuilder('question')
-      .select('id')
-      .orderBy('RANDOM()')
+      .select('question.id')
+      .orderBy('RAND()')
       .getOne();
   }
 }

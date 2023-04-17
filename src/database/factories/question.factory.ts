@@ -12,7 +12,7 @@ export default setSeederFactory(Questions, async (faker) => {
   question.content = faker.lorem.paragraph();
 
   // 관계설정
-  question.UserId = user[0].id;
+  question.UserId = user.id;
 
   return question;
 })

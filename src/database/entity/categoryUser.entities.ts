@@ -10,7 +10,7 @@ import {
 import { Categories } from "./category.entities";
 import { Users } from "./user.entities";
 
-@Entity()
+@Entity('CategoryUser')
 export class CategoryUsers {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
@@ -18,16 +18,16 @@ export class CategoryUsers {
   UserId: number;
   @Column({ type: 'int', name: 'CategoryId' })
   CategoryId: number;
-  @ManyToOne(() => Users, (Users) => Users.CategoryUsers, {
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
-  @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
-  Users: Users;
   @ManyToOne(() => Categories, (Categories) => Categories.CategoryUsers, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
   @JoinColumn([{ name: 'CategoryId', referencedColumnName: 'id' }])
   Categories: Categories;
+  @ManyToOne(() => Users, (Users) => Users.CategoryUsers, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
+  Users: Users;
 }

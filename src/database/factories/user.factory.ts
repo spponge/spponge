@@ -9,7 +9,7 @@ export default setSeederFactory(Users, async (faker) => {
   user.point = faker.datatype.number({ min: 0, max: 1000 });
   user.nickName = faker.helpers.unique(faker.internet.userName);
   user.email = faker.internet.email(user.nickName);
-  user.TierId = tier[0].id;
+  user.TierId = tier.id;
 
   return user;
 })

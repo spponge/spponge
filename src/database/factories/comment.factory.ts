@@ -5,13 +5,13 @@ import { Users } from "../entity/user.entities";
 
 export default setSeederFactory(Comments, async (faker) => {
   const comment = new Comments();
-  const question = new Questions().getRandomQuestion();
+  const question = await new Questions().getRandomQuestion();
   const user = await new Users().getRandomUser();
 
   faker.locale = 'ko';
   comment.content = faker.lorem.sentence();
-  comment.QuestionId = question[0].id;
-  comment.UserId = user[0].id;
+  comment.QuestionId = question.id;
+  comment.UserId = user.id;
 
   return comment;
 })
