@@ -1,26 +1,15 @@
-/*
 import { setSeederFactory } from "typeorm-extension";
 import { QuestionLikes } from "../entity/questionLike.entities";
 import { Questions } from "../entity/question.entities";
 import { Users } from "../entity/user.entities";
 
-export default setSeederFactory(QuestionLikes, (faker) => {
+export default setSeederFactory(QuestionLikes, async (faker) => {
   const questionLike = new QuestionLikes();
+  const question = new Questions().getRandomQuestion();
+  const user = await new Users().getRandomUser();
 
-  faker.locale = "ko";
-
-  // 관계설정
-  const question = new Questions();
-  question.title = faker.lorem.sentence();
-  question.content = faker.lorem.paragraph();
-  questionLike.Questions = question;
-
-  const user = new Users();
-  user.email = faker.internet.email();
-  user.password = faker.internet.password();
-  user.point = faker.datatype.number({ min: 0, max: 1000 });
-  user.nickName = faker.internet.userName();
-  questionLike.Users = user;
+  questionLike.QuestionId = question[0].id;
+  questionLike.UserId = user[0].id;
 
   return questionLike;
-});*/
+});

@@ -11,11 +11,11 @@ import { Users } from "./database/entity/user.entities";
 import { Tiers } from "./database/entity/tier.entities";
 import { Categories } from "./database/entity/category.entities";
 import { CategoryUsers } from "./database/entity/categoryUser.entities";
-// import { Comments } from "./entity/comment.entities";
-// import { CommentLikes } from "./entity/commentLike.entities";
-// import { Questions } from "./entity/question.entities";
-// import { QuestionLikes } from "./entity/questionLike.entities";
-// import { ReComments } from "./entity/recomment.entities";
+import { Comments } from "./database/entity/comment.entities";
+import { CommentLikes } from "./database/entity/commentLike.entities";
+import { Questions } from "./database/entity/question.entities";
+import { QuestionLikes } from "./database/entity/questionLike.entities";
+import { ReComments } from "./database/entity/recomment.entities";
 
 @Module({
   imports: [
@@ -35,7 +35,7 @@ import { CategoryUsers } from "./database/entity/categoryUser.entities";
           username: configService.get("DB_USERNAME"),
           password: configService.get("DB_PASSWORD"),
           database: configService.get("DB_DATABASE"),
-          entities: [Tiers, Users,Categories,CategoryUsers, /*  Comments, CommentLikes, Questions, QuestionLikes, ReComments*/],
+          entities: [Tiers, Users,Categories,CategoryUsers, Comments, CommentLikes, Questions, QuestionLikes, ReComments],
           synchronize: true
         };
       }

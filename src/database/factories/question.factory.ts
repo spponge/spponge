@@ -1,12 +1,10 @@
-/*
 import { setSeederFactory } from 'typeorm-extension';
 import { Questions } from '../entity/question.entities';
-import { Comments } from "../entity/comment.entities";
 import { Users } from "../entity/user.entities";
-import { QuestionLikes } from "../entity/questionLike.entities";
 
-export default setSeederFactory(Questions, (faker) => {
+export default setSeederFactory(Questions, async (faker) => {
   const question = new Questions();
+  const user = await new Users().getRandomUser();
 
   faker.locale = 'ko';
 
@@ -14,12 +12,7 @@ export default setSeederFactory(Questions, (faker) => {
   question.content = faker.lorem.paragraph();
 
   // 관계설정
-  const user = new Users();
-  user.email = faker.internet.email();
-  user.password = faker.internet.password();
-  user.point = faker.datatype.number({ min: 0, max: 1000 });
-  user.nickName = faker.internet.userName();
-  question.Users = user;
+  question.UserId = user[0].id;
 
   return question;
-})*/
+})

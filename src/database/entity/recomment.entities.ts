@@ -1,5 +1,4 @@
-/*
-/!* eslint-disable prettier/prettier *!/
+/* eslint-disable prettier/prettier */
 import {
   Column,
   Entity,
@@ -9,6 +8,7 @@ import {
   Unique,
 } from 'typeorm';
 import { Comments } from './comment.entities';
+import { Users } from "./user.entities";
 
 // ReComment Entity
 @Entity('ReComment')
@@ -19,6 +19,8 @@ export class ReComments {
   content: string;
   @Column({ type: 'int', name: 'CommentId' })
   CommentId: number;
+  @Column({ type: 'int', name: 'UserId' })
+  UserId: number;
   // Relations
   @ManyToOne(() => Comments, (Comments) => Comments.ReComments,{
     onDelete: 'CASCADE',
@@ -26,5 +28,10 @@ export class ReComments {
   })
   @JoinColumn([{ name: 'CommentId', referencedColumnName: 'id' }])
   Comments: Comments;
+  @ManyToOne(() => Users, (Users) => Users.ReComments,{
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
+  Users: Users;
 }
-*/

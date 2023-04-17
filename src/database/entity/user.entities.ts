@@ -4,11 +4,14 @@ import {
 } from "typeorm";
 import { Tiers } from './tier.entities';
 import { CategoryUsers } from './categoryUser.entities';
-// import { Categories } from './category.entities';
-// import { Questions } from './question.entities';
-// import { QuestionLikes } from './questionLike.entities';
-// import { Comments } from './comment.entities';
-// import { CommentLikes } from './commentLike.entities';
+import { Categories } from './category.entities';
+
+import { Questions } from './question.entities';
+import { QuestionLikes } from './questionLike.entities';
+import { Comments } from './comment.entities';
+import { CommentLikes } from './commentLike.entities';
+import { ReComments } from "./recomment.entities";
+import { dataSource } from "../../../data-source";
 
 @Entity()
 @Unique(['email'])
@@ -33,14 +36,27 @@ export class Users {
   Tiers: Tiers;
   @OneToMany(() => CategoryUsers, (CategoryUsers) => CategoryUsers.Users)
   CategoryUsers:CategoryUsers
-  // @OneToMany(() => Questions, (Questions) => Questions.Users)
-  // Questions:Questions[]
-  // @OneToMany(() => QuestionLikes, (QuestionLikes) => QuestionLikes.Users)
-  // QuestionLikes:QuestionLikes[]
-  // @OneToMany(() => Comments, (Comments) => Comments.Users)
-  // Comments:Comments[]
-  // @OneToMany(() => CommentLikes, (CommentLikes) => CommentLikes.Users)
-  // CommentLikes:CommentLikes[]
+
+  @OneToMany(() => Questions, (Questions) => Questions.Users)
+  Questions:Questions[]
+  @OneToMany(() => QuestionLikes, (QuestionLikes) => QuestionLikes.Users)
+  QuestionLikes:QuestionLikes[]
+  @OneToMany(() => Comments, (Comments) => Comments.Users)
+  Comments:Comments[]
+  @OneToMany(() => CommentLikes, (CommentLikes) => CommentLikes.Users)
+  CommentLikes:CommentLikes[]
+  @OneToMany(() => ReComments, (ReComments) => ReComments.Users)
+  ReComments:ReComments[]
+
+  public async getRandomUser():Promise<Users> {
+    // Tier Entity와의 관계 설정
+    const userRepository = dataSource.getRepository(Users);
+    return await userRepository
+      .createQueryBuilder('user')
+      .select('id')
+      .orderBy('RANDOM()')
+      .getOne();
+  }
 }
 
 

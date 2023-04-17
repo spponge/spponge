@@ -1,5 +1,4 @@
-/*
-/!* eslint-disable prettier/prettier *!/
+/* eslint-disable prettier/prettier */
 import {
   Column,
   Entity,
@@ -34,4 +33,3 @@ export class CommentLikes {
   @JoinColumn([{ name: 'CommentId', referencedColumnName: 'id' }])
   Comments: Comments;
 }
-*/

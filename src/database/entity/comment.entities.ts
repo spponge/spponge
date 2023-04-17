@@ -1,5 +1,4 @@
-/*
-/!* eslint-disable prettier/prettier *!/
+/* eslint-disable prettier/prettier */
 import {
   Column,
   Entity,
@@ -13,6 +12,7 @@ import { Questions } from './question.entities';
 import { ReComments } from './recomment.entities';
 import { CommentLikes } from './commentLike.entities';
 import { Users } from "./user.entities";
+import { dataSource } from "../../../data-source";
 
 // Comment Entity
 @Entity('Comment')
@@ -42,4 +42,14 @@ export class Comments {
   ReComments: ReComments[];
   @OneToMany(() => CommentLikes, (CommentLikes)=>CommentLikes.Comments)
   CommentLikes: CommentLikes
-}*/
+
+  public async getRandomComment():Promise<Comments> {
+    // Tier Entity와의 관계 설정
+    const commentRepository = dataSource.getRepository(Comments);
+    return await commentRepository
+      .createQueryBuilder('comment')
+      .select('id')
+      .orderBy('RANDOM()')
+      .getOne();
+  }
+}

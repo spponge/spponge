@@ -10,6 +10,7 @@ import {
 } from "typeorm";
 import { Users } from './user.entities';
 import { CategoryUsers } from "./categoryUser.entities";
+import { dataSource } from "../../../data-source";
 
 // Categorys Entity
 @Entity('Categories')
@@ -25,4 +26,14 @@ export class Categories {
   // 다대다 지양
   // @ManyToMany(() => Users, (Users) => Users.Categories)
   // Users: Users[];
+
+  public async getRandomCategory():Promise<Categories> {
+    // Tier Entity와의 관계 설정
+    const categoryRepository = dataSource.getRepository(Categories);
+    return await categoryRepository
+      .createQueryBuilder('category')
+      .select('id')
+      .orderBy('RANDOM()')
+      .getOne();
+  }
 }

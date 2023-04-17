@@ -1,5 +1,4 @@
-/*
-/!* eslint-disable prettier/prettier *!/
+/* eslint-disable prettier/prettier */
 import {
   Column,
   Entity,
@@ -11,6 +10,7 @@ import {
 import { QuestionLikes } from './questionLike.entities';
 import { Comments } from './comment.entities';
 import { Users } from './user.entities';
+import { dataSource } from "../../../data-source";
 
 @Entity('Question')
 export class Questions {
@@ -32,5 +32,16 @@ export class Questions {
   QuestionLikes: QuestionLikes[];
   @OneToMany(() => Comments, (Comments) => Comments.Questions)
   Comments: Comments[];
+
+
+
+  public async getRandomQuestion():Promise<Questions> {
+    // Tier Entity와의 관계 설정
+    const questionRepository = dataSource.getRepository(Questions);
+    return await questionRepository
+      .createQueryBuilder('question')
+      .select('id')
+      .orderBy('RANDOM()')
+      .getOne();
+  }
 }
-*/

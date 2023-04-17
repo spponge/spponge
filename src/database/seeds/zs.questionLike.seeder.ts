@@ -1,16 +1,14 @@
-/*
 import { Seeder, SeederFactoryManager } from 'typeorm-extension';
 import { DataSource } from 'typeorm';
-import {Comments} from '../entity/comment.entities'
+import {QuestionLikes} from '../entity/questionLike.entities'
 
-export default class CommentSeeder implements Seeder {
+export default class QuestionLikeSeeder implements Seeder {
   public async run(
     dataSource: DataSource,
     factoryManager: SeederFactoryManager
   ): Promise<any> {
-    const commentFactory = await factoryManager.get(Comments);
+    const questionLikeFactory = await factoryManager.get(QuestionLikes);
     // save 5 factories generated entities, to the database
-    await commentFactory.saveMany(300);
+    await questionLikeFactory.saveMany(1000);
   }
 }
-*/
