@@ -1,4 +1,5 @@
-/* eslint-disable prettier/prettier */
+/*
+/!* eslint-disable prettier/prettier *!/
 import {
   Column,
   Entity,
@@ -7,8 +8,8 @@ import {
   PrimaryGeneratedColumn,
   Unique
 } from "typeorm";
-import { Categories } from "./category.entites";
-import { Users } from "./user.entites";
+import { Categories } from "./category.entities";
+import { Users } from "./user.entities";
 
 @Entity()
 export class CategoryUsers {
@@ -18,16 +19,16 @@ export class CategoryUsers {
   UserId: number;
   @Column({ type: 'int', name: 'CategoryId' })
   CategoryId: number;
-  // @ManyToOne(() => Users, (Users) => Users.CategoryUsers, {
-  //   onDelete: 'CASCADE',
-  //   onUpdate: 'CASCADE',
-  // })
-  // @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
-  // Users: Users;
+  @ManyToOne(() => Users, (Users) => Users.CategoryUsers, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
+  Users: Users;
   @ManyToOne(() => Categories, (Categories) => Categories.CategoryUsers, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
   @JoinColumn([{ name: 'CategoryId', referencedColumnName: 'id' }])
   Categories: Categories;
-}
+}*/

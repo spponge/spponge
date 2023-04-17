@@ -1,4 +1,5 @@
-/* eslint-disable prettier/prettier */
+/*
+/!* eslint-disable prettier/prettier *!/
 import {
   Column,
   Entity,
@@ -7,9 +8,9 @@ import {
   PrimaryGeneratedColumn,
   Unique
 } from "typeorm";
-import { QuestionLikes } from './questionLike.entites';
-import { Comments } from './comment.entites';
-import { Users } from './user.entites';
+import { QuestionLikes } from './questionLike.entities';
+import { Comments } from './comment.entities';
+import { Users } from './user.entities';
 
 @Entity('Question')
 export class Questions {
@@ -21,14 +22,15 @@ export class Questions {
   content: string;
   @Column({ type: 'int', name: 'UserId' })
   UserId: number;
-  // @ManyToOne(() => Users, Users => Users.Questions, {
-  //   onDelete: 'CASCADE',
-  //   onUpdate: 'CASCADE',
-  // })
-  // @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
-  // Users: Users;
+  @ManyToOne(() => Users, Users => Users.Questions, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
+  Users: Users;
   @OneToMany(() => QuestionLikes, (QuestionLikes) => QuestionLikes.Questions)
   QuestionLikes: QuestionLikes[];
   @OneToMany(() => Comments, (Comments) => Comments.Questions)
   Comments: Comments[];
 }
+*/

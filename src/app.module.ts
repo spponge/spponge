@@ -7,15 +7,15 @@ import { AppService } from "./app.service";
 import { LoggerMiddleware } from "./common/middleware/logger";
 import { QuestionModule } from "./domain/question/question.module";
 import { UserModule } from "./domain/user/user.module";
-import { Tiers } from "./entity/tier.entites";
-import { Users } from "./entity/user.entites";
-import { Categories } from "./entity/category.entites";
-import { CategoryUsers } from "./entity/categoryUser.entites";
-import { Comments } from "./entity/comment.entites";
-import { CommentLikes } from "./entity/commentLike.entites";
-import { Questions } from "./entity/question.entites";
-import { QuestionLikes } from "./entity/questionLike.entites";
-import { ReComments } from "./entity/recomment.entites";
+import { Users } from "./database/entity/user.entities";
+import { Tiers } from "./database/entity/tier.entities";
+// import { Categories } from "./entity/category.entities";
+// import { CategoryUsers } from "./entity/categoryUser.entities";
+// import { Comments } from "./entity/comment.entities";
+// import { CommentLikes } from "./entity/commentLike.entities";
+// import { Questions } from "./entity/question.entities";
+// import { QuestionLikes } from "./entity/questionLike.entities";
+// import { ReComments } from "./entity/recomment.entities";
 
 @Module({
   imports: [
@@ -35,7 +35,7 @@ import { ReComments } from "./entity/recomment.entites";
           username: configService.get("DB_USERNAME"),
           password: configService.get("DB_PASSWORD"),
           database: configService.get("DB_DATABASE"),
-          entities: [Tiers, Users, Categories, CategoryUsers, Comments, CommentLikes, Questions, QuestionLikes, ReComments],
+          entities: [Tiers, Users,/* , Categories, CategoryUsers, Comments, CommentLikes, Questions, QuestionLikes, ReComments*/],
           synchronize: true
         };
       }

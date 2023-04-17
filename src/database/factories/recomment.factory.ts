@@ -1,6 +1,7 @@
+/*
 import { setSeederFactory } from 'typeorm-extension';
-import { ReComments } from '../entity/recomment.entites';
-import { Comments } from "../entity/comment.entites";
+import { ReComments } from '../entity/recomment.entities';
+import { Comments } from "../entity/comment.entities";
 
 export default setSeederFactory(ReComments, (faker) => {
   const recomment = new ReComments();
@@ -14,4 +15,4 @@ export default setSeederFactory(ReComments, (faker) => {
   recomment.Comments = comment;
 
   return recomment;
-})
+})*/

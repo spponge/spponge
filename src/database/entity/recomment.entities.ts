@@ -1,4 +1,5 @@
-/* eslint-disable prettier/prettier */
+/*
+/!* eslint-disable prettier/prettier *!/
 import {
   Column,
   Entity,
@@ -7,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
-import { Comments } from './comment.entites';
+import { Comments } from './comment.entities';
 
 // ReComment Entity
 @Entity('ReComment')
@@ -15,7 +16,7 @@ export class ReComments {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
   @Column({ nullable: true })
-  comment: string;
+  content: string;
   @Column({ type: 'int', name: 'CommentId' })
   CommentId: number;
   // Relations
@@ -26,3 +27,4 @@ export class ReComments {
   @JoinColumn([{ name: 'CommentId', referencedColumnName: 'id' }])
   Comments: Comments;
 }
+*/

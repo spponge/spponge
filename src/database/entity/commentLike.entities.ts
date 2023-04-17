@@ -1,4 +1,5 @@
-/* eslint-disable prettier/prettier */
+/*
+/!* eslint-disable prettier/prettier *!/
 import {
   Column,
   Entity,
@@ -7,8 +8,8 @@ import {
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
-import { Users } from './user.entites';
-import { Comments } from './comment.entites';
+import { Users } from './user.entities';
+import { Comments } from './comment.entities';
 
 // CommentLike Entity
 @Entity('CommentLike')
@@ -19,13 +20,13 @@ export class CommentLikes {
   CommentId: number;
   @Column({ type: 'int', name: 'UserId' })
   UserId: number;
-  // Relations
-  // @ManyToOne(() => Users, (Users) => Users.CommentLikes, {
-  //   onDelete: 'CASCADE',
-  //   onUpdate: 'CASCADE',
-  // })
-  // @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
-  // Users: Users;
+  Relations
+  @ManyToOne(() => Users, (Users) => Users.CommentLikes, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn([{ name: 'UserId', referencedColumnName: 'id' }])
+  Users: Users;
   @ManyToOne(() => Comments, (Comments) => Comments.CommentLikes, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
@@ -33,3 +34,4 @@ export class CommentLikes {
   @JoinColumn([{ name: 'CommentId', referencedColumnName: 'id' }])
   Comments: Comments;
 }
+*/

@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Users } from "./user.entites";
+import { Users } from "./user.entities";
 
 @Entity()
 export class Tiers {
@@ -7,6 +7,6 @@ export class Tiers {
   id: number;
   @Column({ type: "varchar", name: "tierName" })
   tierName: string;
-  // @OneToMany(() => Users, (Users) => Users.Tiers)
-  // Users: Users[];
+  @OneToMany(() => Users, (Users) => Users.Tiers)
+  Users: Users[];
 }

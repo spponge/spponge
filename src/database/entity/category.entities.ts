@@ -1,4 +1,5 @@
-/* eslint-disable prettier/prettier */
+/*
+/!* eslint-disable prettier/prettier *!/
 import {
   Column,
   Entity,
@@ -8,8 +9,8 @@ import {
   PrimaryGeneratedColumn,
   Unique
 } from "typeorm";
-import { Users } from './user.entites';
-import { CategoryUsers } from "./categoryUser.entites";
+import { Users } from './user.entities';
+import { CategoryUsers } from "./categoryUser.entities";
 
 // Categorys Entity
 @Entity('Categories')
@@ -25,4 +26,4 @@ export class Categories {
   // 다대다 지양
   // @ManyToMany(() => Users, (Users) => Users.Categories)
   // Users: Users[];
-}
+}*/

@@ -1,7 +1,8 @@
+/*
 import { setSeederFactory } from 'typeorm-extension';
-import { Comments } from '../entity/comment.entites';
-import { Questions } from "../entity/question.entites";
-import { Users } from "../entity/user.entites";
+import { Comments } from '../entity/comment.entities';
+import { Questions } from "../entity/question.entities";
+import { Users } from "../entity/user.entities";
 
 export default setSeederFactory(Comments, (faker) => {
   const comment = new Comments();
@@ -16,12 +17,12 @@ export default setSeederFactory(Comments, (faker) => {
   comment.Questions = question;
 
   // User Entity와의 관계 설정
-  // const user = new Users();
-  // user.email = faker.internet.email();
-  // user.password = faker.internet.password();
-  // user.point = faker.datatype.number({ min: 0, max: 1000 });
-  // user.nickName = faker.internet.userName();
-  // comment.Users = user;
+  const user = new Users();
+  user.email = faker.internet.email();
+  user.password = faker.internet.password();
+  user.point = faker.datatype.number({ min: 0, max: 1000 });
+  user.nickName = faker.internet.userName();
+  comment.Users = user;
 
   return comment;
-})
+})*/
