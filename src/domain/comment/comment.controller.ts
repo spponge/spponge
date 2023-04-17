@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Post, Patch, Delete, UseGuards, Param } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/common/auth/jwt/jwt.guard';
+import { JwtAuthGuard } from 'src/domain/auth/jwt/jwt.guard';
 import { User } from 'src/common/decorator/user.decorator';
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/input/create-comment.dto';

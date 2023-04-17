@@ -7,7 +7,7 @@ import { Comments } from 'src/entity/comment.entities';
 import { CommentRepository } from './comment.repository.interface';
 import { UserModule } from '../user/user.module';
 import { UserRepository } from '../user/user.repository';
-import { AuthModule } from 'src/common/auth/auth.module';
+import { AuthModule } from 'src/domain/auth/auth.module';
 import { CommentRepositoryImpl } from './comment.repository';
 
 @Module({
