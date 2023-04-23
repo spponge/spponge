@@ -78,5 +78,14 @@ describe('UserService', () => {
                 Tiers: null,
             });
         });
+
+        describe('updateNickNmae', () => {
+            it('회원의 닉네임이 수정되어야 한다.', async () => {
+                const updateUserDto: UpdateUserDto = { nickName: '길똥이' };
+                const UserId = 1;
+                const result = await userService.updateNickNmae(updateUserDto, UserId);
+                expect(result).toBe(undefined);
+            });
+        });
     });
 });
