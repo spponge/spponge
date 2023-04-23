@@ -38,4 +38,12 @@ export class UserService {
         }
         return await this.userRepository.updateNickName(updateUserDto, UserId);
     }
+
+    async delete(UserId: number): Promise<void> {
+        const user = await this.userRepository.findUserByIdWithoutPassword(UserId);
+        if (!user) {
+            throw new NotFoundException('유저를 찾을 수 없습니다.');
+        }
+        return await this.userRepository.delete(UserId);
+    }
 }

@@ -88,5 +88,13 @@ describe('UserService', () => {
                 expect(result).toBe(undefined);
             });
         });
+
+        describe('delete', () => {
+            it('회원이 탈퇴되어야 한다.', async () => {
+                const UserId = 1;
+                const result = await userService.delete(UserId);
+                expect(result).toBe(undefined);
+            });
+        });
     });
 });
