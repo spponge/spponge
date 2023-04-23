@@ -44,6 +44,6 @@ export class UserRepository implements IUserRepository {
     async updateNickName(updateUserDto: UpdateUserDto, UserId: number): Promise<void> {
         const { nickName } = updateUserDto;
         await this.userModel.update({ id: UserId }, { nickName: nickName });
-        throw new Error('Method not implemented.');
+        return;
     }
 }
