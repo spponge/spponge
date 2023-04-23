@@ -58,4 +58,23 @@ describe('UserService', () => {
             expect(result).toBe(undefined);
         });
     });
+
+    describe('findOne', () => {
+        it('로그인한 회원의 정보가 조회되어야 한다.', async () => {
+            const UserId = 1;
+            const result = await userService.findOne(UserId);
+            expect(result).toEqual({
+                id: 1,
+                email: 'honggd@test.com',
+                password: 'asdf1234!',
+                point: 0,
+                nickName: '홍지디',
+                TierId: 1,
+                Comments: null,
+                ReComments: null,
+                Questions: null,
+                Tiers: null,
+            });
+        });
+    });
 });

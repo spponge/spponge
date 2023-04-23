@@ -34,7 +34,7 @@ export class UserRepository implements IUserRepository {
     async findUserByIdWithoutPassword(userId: number): Promise<Users | null> {
         const user = await this.userModel
             .createQueryBuilder('user')
-            .select(['user.id', 'user.email', 'user.nickName'])
+            .select(['user.id', 'user.email', 'user.nickName', 'user.point', 'user.TierId'])
             .where('user.id = :id', { id: userId })
             .getOne();
         return user;
