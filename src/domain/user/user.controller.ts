@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Post, Body, Get, Patch, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Get, Patch, Delete, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/input/create-user.dto';
@@ -32,5 +32,12 @@ export class UserController {
     @Patch()
     async updateNickName(@Body() updateUserDto: UpdateUserDto, @User() user): Promise<void> {
         return await this.userService.updateNickNmae(updateUserDto, user.id);
+    }
+
+    @ApiOperation({ summary: '회원 탈퇴 API' })
+    @UseGuards(JwtAuthGuard)
+    @Delete()
+    async delete(@User() user): Promise<void> {
+        return await this.userService.delete(user.id);
     }
 }
