@@ -3,6 +3,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Users } from 'src/entity/user.entities';
 import { CreateUserDto } from './dto/input/create-user.dto';
+import { UpdateUserDto } from './dto/input/update-user.dto';
 import { VerifyUserEmailDto } from './dto/input/verify-user-email.dto';
 import { IUserRepository } from './user.repository.interface';
 import { UserService } from './user.service';
@@ -27,6 +28,7 @@ class FakeUserRepository implements IUserRepository {
         };
         return result;
     }
+    async updateNickName(updateUserDto: UpdateUserDto, UserId: number): Promise<void> {}
 }
 
 describe('UserService', () => {

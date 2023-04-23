@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { IUserRepository } from './user.repository.interface';
 import { CreateUserDto } from './dto/input/create-user.dto';
 import { VerifyUserEmailDto } from './dto/input/verify-user-email.dto';
+import { UpdateUserDto } from './dto/input/update-user.dto';
 
 @Injectable()
 export class UserRepository implements IUserRepository {
@@ -38,5 +39,11 @@ export class UserRepository implements IUserRepository {
             .where('user.id = :id', { id: userId })
             .getOne();
         return user;
+    }
+
+    async updateNickName(updateUserDto: UpdateUserDto, UserId: number): Promise<void> {
+        const { nickName } = updateUserDto;
+        await this.userModel.update({ id: UserId }, { nickName: nickName });
+        throw new Error('Method not implemented.');
     }
 }
