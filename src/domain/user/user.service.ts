@@ -1,12 +1,15 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
-import { UserRepository } from './user.repository';
+import { Inject, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/input/create-user.dto';
+import { IUserRepository } from './user.repository.interface';
 
 @Injectable()
 export class UserService {
-    constructor(private readonly userRepository: UserRepository) {}
+    constructor(
+        @Inject(IUserRepository)
+        private readonly userRepository: IUserRepository,
+    ) {}
 
     async create(createUserDto: CreateUserDto): Promise<void> {
         const { email, password, confirmPassword, nickName } = createUserDto;
