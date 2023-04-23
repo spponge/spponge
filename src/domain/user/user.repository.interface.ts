@@ -9,5 +9,6 @@ export interface IUserRepository {
     findUserByEmail(emailVerificationDto: VerifyUserEmailDto): Promise<Users>;
     findUserByIdWithoutPassword(UserId: number): Promise<Users | null>;
     updateNickName(updateUserDto: UpdateUserDto, UserId: number): Promise<void>;
+    delete(UserId: number): Promise<void>;
 }
 export const IUserRepository = Symbol('IUserRepository');

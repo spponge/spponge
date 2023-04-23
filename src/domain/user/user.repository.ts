@@ -46,4 +46,8 @@ export class UserRepository implements IUserRepository {
         await this.userModel.update({ id: UserId }, { nickName: nickName });
         return;
     }
+
+    async delete(UserId: number): Promise<void> {
+        await this.userModel.delete({ id: UserId });
+    }
 }

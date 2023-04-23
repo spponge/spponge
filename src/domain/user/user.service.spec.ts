@@ -29,6 +29,7 @@ class FakeUserRepository implements IUserRepository {
         return result;
     }
     async updateNickName(updateUserDto: UpdateUserDto, UserId: number): Promise<void> {}
+    async delete(UserId: number): Promise<void> {}
 }
 
 describe('UserService', () => {
