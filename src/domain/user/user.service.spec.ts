@@ -10,19 +10,7 @@ import { UserService } from './user.service';
 class FakeUserRepository implements IUserRepository {
     async create(createUserDto: CreateUserDto): Promise<void> {}
     async findUserByEmail(emailVerificationDto: VerifyUserEmailDto): Promise<Users> {
-        const result = {
-            id: 1,
-            email: 'honggd@test.com',
-            password: 'asdf1234!',
-            point: 0,
-            nickName: '홍지디',
-            TierId: 1,
-            Comments: null,
-            ReComments: null,
-            Questions: null,
-            Tiers: null,
-        };
-        return result;
+        return null;
     }
     async findUserByIdWithoutPassword(userId: number): Promise<Users> {
         const result = {
@@ -61,7 +49,7 @@ describe('UserService', () => {
     describe('create', () => {
         it('새로운 회원 정보가 저장되어야 한다.', async () => {
             const createUserDto: CreateUserDto = {
-                email: 'user@example.com',
+                email: 'zxcvadsfzxv@example.com',
                 password: 'asdf1234!',
                 confirmPassword: 'asdf1234!',
                 nickName: '테스트',
