@@ -3,11 +3,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from 'src/entity/user.entities';
 import { Repository } from 'typeorm';
+import { IUserRepository } from './user.repository.interface';
 import { CreateUserDto } from './dto/input/create-user.dto';
 import { VerifyUserEmailDto } from './dto/input/verify-user-email.dto';
 
 @Injectable()
-export class UserRepository {
+export class UserRepository implements IUserRepository {
     constructor(@InjectRepository(Users) private userModel: Repository<Users>) {}
 
     async create(createUserDto: CreateUserDto): Promise<void> {
