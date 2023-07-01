@@ -10,5 +10,6 @@ export default class CommentSeeder implements Seeder {
     const commentFactory = await factoryManager.get(Comments);
     // save 5 factories generated entities, to the database
     await commentFactory.saveMany(300);
+    console.log('Comment seeding complete')
   }
 }

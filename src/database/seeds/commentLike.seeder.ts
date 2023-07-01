@@ -10,5 +10,6 @@ export default class CommentLikeSeeder implements Seeder {
     const commentLikeFactory = await factoryManager.get(CommentLikes);
     // save 5 factories generated entities, to the database
     await commentLikeFactory.saveMany(300);
+    console.log('CommentLike seeding complete')
   }
 }

@@ -10,5 +10,6 @@ export default class QuestionLikeSeeder implements Seeder {
     const questionLikeFactory = await factoryManager.get(QuestionLikes);
     // save 5 factories generated entities, to the database
     await questionLikeFactory.saveMany(1000);
+    console.log('QuestionLike seeding complete')
   }
 }

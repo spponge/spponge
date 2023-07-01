@@ -10,5 +10,6 @@ export default class CategoryUserSeeder implements Seeder {
     const categoryUserFactory = await factoryManager.get(CategoryUsers);
     // save 5 factories generated entities, to the database
     await categoryUserFactory.saveMany(300);
+    console.log('CategoryUser seeding complete')
   }
 }

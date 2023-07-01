@@ -10,5 +10,6 @@ export default class TierSeeder implements Seeder {
     const tierFactory = await factoryManager.get(Tiers);
     // save 5 factories generated entities, to the database
     await tierFactory.saveMany(10);
+    console.log('Tier seeding complete')
   }
 }

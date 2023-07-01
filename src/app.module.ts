@@ -36,7 +36,8 @@ import { ReComments } from "./database/entity/recomment.entities";
           password: configService.get("DB_PASSWORD"),
           database: configService.get("DB_DATABASE"),
           entities: [Tiers, Users, Categories, CategoryUsers, Comments, CommentLikes, Questions, QuestionLikes, ReComments],
-          synchronize: true
+          synchronize: true,
+          dropSchema: true,
         };
       }
     }),
