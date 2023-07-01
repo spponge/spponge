@@ -16,9 +16,9 @@ import { dataSource } from "../../../data-source";
 export class Questions {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
-  @Column({ nullable: true })
+  @Column({ type: "varchar", nullable: true })
   title: string;
-  @Column({ nullable: true })
+  @Column({ type: "text", nullable: true })
   content: string;
   @Column({ type: 'int', name: 'UserId' })
   UserId: number;

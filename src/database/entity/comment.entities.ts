@@ -19,7 +19,7 @@ import { dataSource } from "../../../data-source";
 export class Comments {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
-  @Column({ nullable: true })
+  @Column({ type: "varchar",nullable: true })
   content: string;
   @Column({ type: 'int', name: 'QuestionId' })
   QuestionId: number;
